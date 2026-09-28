@@ -417,11 +417,15 @@ STR.zh = {
   'teach.settings.t': '设置',
   'teach.easy': '慢速模式',
   'teach.easyDesc': '动作更慢、目标更大，适合低年级或需要更多时间的学生。',
-  'teach.reset': '清除这台设备上的进度',
-  'teach.resetAsk': '确定要清除吗？画册、印章、画作草稿和证书记录都会被清除。',
-  'teach.resetYes': '清除',
-  'teach.resetNo': '不清除',
-  'teach.resetDone': '进度已清除。',
+  'teach.reset': '清除这台设备上的进度，重新开始',
+
+  /* restart */
+  'restart.btn': '重新开始',
+  'restart.title': '要重新开始吗？',
+  'restart.ask': '画册里画好的每一页、慈心印、名字、画作草稿和证书记录都会清空，从封面重新开始。声音和慢速模式的设置会保留。',
+  'restart.yes': '清空，重新开始',
+  'restart.no': '再想想',
+  'restart.done': '已经重新开始了，画册又是空白的了。',
 };
 
 /* 护生小博士题库：`a` 里第一个是正确答案，游戏会打乱顺序。 */

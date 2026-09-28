@@ -26,8 +26,11 @@
   HS.save = () => { try { localStorage.setItem(KEY, JSON.stringify(HS.state)); } catch (e) { /* storage unavailable */ } };
   HS.loadDraft = () => { try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (e) { return null; } };
   HS.saveDraft = (d) => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); return true; } catch (e) { return false; } };
+  /* Start over: clear the album, seals, name, painting draft and quiz.
+   * Sound and gentle mode are settings of this device, so they stay. */
   HS.reset = () => {
-    HS.state = fresh();
+    const keep = { sound: HS.state.sound, easy: HS.state.easy };
+    HS.state = Object.assign(fresh(), keep);
     try { localStorage.removeItem(KEY); localStorage.removeItem(DRAFT_KEY); } catch (e) { /* ignore */ }
     HS.save();
   };
@@ -167,6 +170,26 @@
     return HS.closeModal;
   };
   HS.closeModal = () => { if (modalClose) modalClose(); };
+
+  /* Ask before starting over. The question lives in the page, because
+   * confirm() dialogs are blocked where the game is embedded. */
+  HS.confirmRestart = function () {
+    const t = HS.t;
+    const box = h('div', { class: 'card', role: 'alertdialog', 'aria-labelledby': 'hs-restart-title', 'aria-describedby': 'hs-restart-text' },
+      h('h2', { id: 'hs-restart-title' }, t('restart.title')),
+      h('p', { id: 'hs-restart-text' }, t('restart.ask')),
+      h('div', { class: 'card-actions' },
+        h('button', { class: 'btn', type: 'button', 'data-autofocus': '', onclick: () => HS.closeModal() }, t('restart.no')),
+        h('button', { class: 'btn btn-seal', type: 'button', onclick: () => {
+          HS.closeModal();
+          HS.reset();
+          Sound.page();
+          HS.go('title');
+          HS.toast(t('restart.done'));
+        } }, t('restart.yes'))));
+    HS.modal(box, { label: t('restart.title') });
+  };
+  HS.restartButton = () => h('button', { class: 'btn btn-small', type: 'button', onclick: HS.confirmRestart }, HS.t('restart.btn'));
 
   /* ---------- art helpers ---------- */
   HS.catSVG = (pose) => Art.svg(pose === 'sleep' ? Art.place(Art.cat({ pose: 'sleep' }), { x: 64, y: 90 }) : Art.place(Art.cat(), { x: 60, y: 120, s: 0.98 }), 120, 124);

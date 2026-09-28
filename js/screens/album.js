@@ -51,6 +51,7 @@
         h('div', { class: 'toolbar' },
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('title') }, '‹ ' + t('ui.cover')),
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('teacher') }, t('title.teacher')),
+          HS.restartButton(),
           HS.soundButton()));
 
       const intro = h('ul', { class: 'album-intro', style: 'margin:0;padding:0' }, h('li', { class: 'leaf leaf-intro is-done', id: 'leaf-prologue' },

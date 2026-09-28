@@ -31,12 +31,6 @@
         if (easy.checked) HS.toast(t('ui.easyOn'));
       });
 
-      const confirm = h('div', { class: 'confirm', hidden: true },
-        h('p', {}, t('teach.resetAsk')),
-        h('div', { class: 'toolbar' },
-          h('button', { class: 'btn btn-small btn-seal', type: 'button', onclick: () => { HS.reset(); confirm.hidden = true; HS.toast(t('teach.resetDone')); } }, t('teach.resetYes')),
-          h('button', { class: 'btn btn-small', type: 'button', onclick: () => { confirm.hidden = true; } }, t('teach.resetNo'))));
-
       root.appendChild(h('article', { class: 'doc' },
         h('div', { class: 'toolbar' },
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('album') }, '‹ ' + t('ui.album')),
@@ -51,8 +45,7 @@
         h('section', {}, h('h2', {}, t('teach.links.t')), h('p', {}, t('teach.links'))),
         h('section', {}, h('h2', {}, t('teach.settings.t')),
           h('label', { class: 'setting', for: 'hs-easy' }, easy, h('span', {}, t('teach.easy')), h('small', {}, t('teach.easyDesc'))),
-          h('div', {}, h('button', { class: 'btn btn-small', type: 'button', onclick: () => { confirm.hidden = false; } }, t('teach.reset'))),
-          confirm)));
+          h('div', {}, h('button', { class: 'btn btn-small', type: 'button', onclick: HS.confirmRestart }, t('teach.reset'))))));
     },
   };
 })();
