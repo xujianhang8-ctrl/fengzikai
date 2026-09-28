@@ -1,68 +1,68 @@
-# 护生之约 · A Promise to Protect Life
+# 护生之约
 
-一个关于丰子恺《护生画集》的课堂小游戏。学生翻开一本空白画册，在六个小场景里练习“倘使我是它”——扫地不伤蚂蚁、清理池塘、给油灯罩上纱罩、送雏鸟回巢、打开笼门、学会读丰子恺的画——最后画一幅自己的护生画，盖上刻着自己名字的印章。
+一个关于丰子恺《护生画集》的课堂小游戏（中文）。学生翻开一本空白画册，在六个小场景里练习“倘使我是它”——扫地不伤蚂蚁、清理池塘、给油灯罩上纱罩、送雏鸟回巢、打开笼门、学会读丰子恺的画——最后画一幅自己的护生画，盖上刻着自己名字的印章。
 
-A classroom game built around Feng Zikai's *Paintings for the Preservation of Life* (护生画集). Students fill a blank album by caring for six small lives, learn to "read" Feng's paintings, then paint and mount one of their own. Bilingual: 中文 and English.
+*A Chinese-language classroom game built on Feng Zikai's* 护生画集 *(Paintings for the Preservation of Life).*
 
-## 怎么打开 · How to open it
+## 怎么打开
 
-- **直接打开 · Open directly:** double-click `index.html`. No installation, no internet needed except for the web fonts (the game falls back to system fonts offline).
-- **一个文件 · One file:** `dist/husheng-zhiyue.html` is the whole game in a single file, easy to copy to a classroom computer or send to students. Rebuild it with `node tools/build.mjs` after any change.
-- **网页 · On the web:** any static host works, e.g. GitHub Pages pointed at this repository.
-- **直接进入某一页 · Deep links:** add `#ants`, `#pond`, `#moths`, `#nest`, `#cage`, `#reading`, `#studio`, `#quiz` or `#teacher` to the address.
+- **直接打开：** 双击 `index.html` 即可，不用安装。没有网络时，书法字体会换成电脑自带的字体，游戏照常运行。
+- **一个文件：** `dist/husheng-zhiyue.html` 是整个游戏打包成的单个文件，方便拷到教室电脑或发给学生。改动之后运行 `node tools/build.mjs` 重新生成。
+- **放到网上：** 任何静态网页服务都可以，比如用 GitHub Pages 发布这个仓库。
+- **直接进入某一页：** 在网址后面加 `#ants`（扫地）、`#pond`（清池）、`#moths`（纱灯）、`#nest`（望母归）、`#cage`（笼门）、`#reading`（读画）、`#studio`（我的护生画）、`#quiz`（护生小博士）或 `#teacher`（给老师）。
 
-Progress, the student's name and their painting draft are kept in the browser's local storage on that device only.
+学习进度、学生名字和画作草稿只保存在这台设备的浏览器里。
 
-## 游戏内容 · What's inside
+## 游戏内容
 
-| 页 · Page | 生命 · Life | 玩法 · Play | 学到什么 · Learning | 诗句 / 原画 · Verse / original |
+| 页 | 生命 | 玩法 | 学到什么 | 诗句 / 原画 |
 | --- | --- | --- | --- | --- |
-| 序 · 一个约定 Prologue | — | Picture book; tap the six volumes on the shelf | Feng Zikai, Li Shutong / Master Hongyi, the 50→100 promise, 450 paintings over 40+ years | 世寿所许，定当遵嘱 |
-| 一 · 扫地 Sweeping Gently | 蚂蚁 Ants | Sweep leaves without startling a line of ants | Mindfulness toward the smallest lives | 扫地恐伤蝼蚁命（古语） |
-| 二 · 清池 A Clear Pond | 鱼 Fish | Net the rubbish, free a fish tangled in line, don't scare the fish | Protect habitats; why random "fish release" can harm | 细雨鱼儿出，微风燕子斜（杜甫） |
-| 三 · 纱灯 The Gauze Lamp | 飞蛾 Moths | Guide moths away, drag a gauze shade over the lamp, blow it out | Prevention over rescue; light pollution science | 为鼠常留饭，怜蛾不点灯（苏轼） |
-| 四 · 望母归 Waiting for Mother | 雏鸟 Chicks | Persuade a boy with a slingshot; carry a fallen chick home slowly | Persuading with empathy, not threats; fledgling facts | 劝君莫打枝头鸟，子在巢中望母归（白居易） |
-| 五 · 笼门 The Cage Door | 画眉 Thrush | Fly as the caged bird; then choose what it really needs | Freedom vs. comfort; wild birds are protected, pets shouldn't be released | 《囚徒之歌》 (Vol. 1) · 笼鸡有食汤锅近，野鹤无粮天地宽 |
-| 六 · 读画 Reading Paintings | 丰子恺的画 | Three picture riddles on real works | Few strokes, faceless figures, poem + picture | 《阿宝两只脚，凳子四只脚》《母之羽》《生的扶持》 |
-| 末页 · 我的护生画 My Own Painting | — | Brush, pale washes, stickers, title, poem, name seal; save as an image | Creating a 护生画 of one's own | — |
-| 护生小博士 The Kindness Quiz | — | 8 questions from a pool of 16; certificate at 6/8 | Review | 护生者，护心也（丰子恺） |
+| 序 · 一个约定 | — | 翻看图画书；点书架上的六集画集 | 丰子恺、李叔同（弘一法师）、五十到一百幅的约定、四十多年画成的四百五十幅 | 世寿所许，定当遵嘱 |
+| 一 · 扫地 | 蚂蚁 | 扫落叶，别惊扰搬家的蚂蚁 | 留心最小的生命 | 扫地恐伤蝼蚁命（古语） |
+| 二 · 清池 | 鱼 | 捞垃圾，解开缠住鱼的渔线，别吓着鱼 | 守护栖息地；随意放生反而可能伤害生命 | 细雨鱼儿出，微风燕子斜（杜甫） |
+| 三 · 纱灯 | 飞蛾 | 引飞蛾飞回月光里，把纱罩拖（或点）到灯上，再吹灭油灯 | 预防胜于补救；灯光为什么让飞蛾迷路 | 为鼠常留饭，怜蛾不点灯（苏轼） |
+| 四 · 望母归 | 雏鸟 | 劝放下弹弓的男孩；慢慢把掉下的小鸟送回窝 | 用同理心劝人，而不是吓唬；离巢幼鸟的常识 | 劝君莫打枝头鸟，子在巢中望母归（白居易） |
+| 五 · 笼门 | 画眉 | 先当笼中的画眉，再决定它真正需要什么 | 自由与安逸；野鸟受保护，宠物鸟不能随便放 | 《囚徒之歌》（第一集）· 笼鸡有食汤锅近，野鹤无粮天地宽 |
+| 六 · 读画 | 丰子恺的画 | 看画猜题，一共三幅 | 寥寥几笔、没有五官、画中有诗 | 《阿宝两只脚，凳子四只脚》《母之羽》《生的扶持》 |
+| 末页 · 我的护生画 | — | 毛笔、淡彩、贴画、题目、题诗、名字印章；保存成图片 | 创作自己的护生画 | — |
+| 护生小博士 | — | 从十六道题里随机出八道，答对六道得证书 | 复习 | 护生者，护心也（丰子恺） |
 
-Each page ends with 倘使我是它 ("If I were it…"), an illustrated moment from the creature's point of view plus a discussion question, and an album leaf stamped with 1–3 red kindness seals (awarded for gentleness, not speed). **给老师 / For teachers** inside the game has learning goals, a 40-minute lesson plan, all discussion questions and a gentle mode for younger players.
+每一页最后都有“倘使我是它”：从小生命的角度看一看，再配一个讨论问题；画页上会盖上一到三枚“慈心印”，看的是细心，不是速度。游戏里的“给老师”一页有学习目标、40分钟课堂建议、全部讨论问题和适合低年级的慢速模式。
 
-## 丰子恺的原画 · Feng Zikai's original paintings
+## 丰子恺的原画
 
-The game is built to show the real paintings. Put scans in `images/paintings/` using the file names listed in [`images/paintings/README.md`](images/paintings/README.md); the game uses them automatically, and `node tools/build.mjs` embeds them in the single-file version. Until a scan is present, the game shows a redrawn sketch that follows the original's composition and labels it **示意图 · Sketch**. The in-game teacher page shows which scans were found.
+游戏会展示丰子恺的原画：把扫描图按 [`images/paintings/README.md`](images/paintings/README.md) 里的文件名放进 `images/paintings/`，游戏会自动使用，`node tools/build.mjs` 也会把它们打包进单文件版本。还没有扫描图时，游戏显示照着原画构图重画的示意图，并标明“示意图”。“给老师”页会显示找到了哪些原画。
 
-Everything else in the game — the interactive scenes, the cat Baixiang, the stickers — is original artwork drawn in the spirit of Feng's style (a few brush strokes, faceless figures, pale washes). It is not presented as his work.
+除此之外的画面——可以互动的场景、白猫“白象”、贴画——都是仿丰子恺笔意的原创绘画（寥寥几笔、人物不画五官、淡淡的颜色），不是他的作品，游戏里也这样注明。
 
-**Rights.** Feng Zikai died in 1975; under China's life+50 copyright term his work entered the public domain on 1 January 2026. Volume 1 of 护生画集 (1929) and the 1920s Zikai Manhua are also public domain in the United States. Later volumes may still be protected in life+70 countries, so the game's originals are all from Volume 1 and the 1920s.
+**版权：** 丰子恺于1975年去世，按中国著作权法（作者去世后50年），他的作品已于2026年1月1日进入公有领域。《护生画集》第一集（1929年）和1920年代的子恺漫画在美国也已进入公有领域。其余几集在保护期更长的国家可能仍受保护，所以游戏里的原画都选自第一集和1920年代的作品。
 
-## 内容核对 · Facts used
+## 用到的史实与引文
 
-- 护生画集: six volumes, 50/60/70/80/90/100 paintings = 450, made for Master Hongyi's 50th to 100th birthdays. Volume 1 (1929) and Volume 2 (1940) inscribed by 弘一法师; Volume 3 (1949) by 叶恭绰; Volumes 4 (1960) and 6 (1973, published 1979) by 朱幼兰; Volume 5 (1965) by 虞愚.
-- 《生的扶持》: 一蟹失足，二蟹持扶。物知慈悲，人何不如。
-- 《囚徒之歌》: 人在牢狱，终日愁欷；鸟在樊笼，终日悲啼。聆此哀音，凄入心脾；何如放舍，任彼高飞。 (Hongyi later renamed it 《凄音》.)
-- 《母之羽》: 雏儿依残羽，殷殷恋慈母。母亡儿不知，犹复相环守。 (The game quotes the first four lines; editions differ slightly in the last line.)
-- Moths circling lamps: insects keep their backs toward the brightest light (Fabian et al., *Nature Communications*, 2024).
-- 画眉 (hwamei) is a national second-class protected species in China since the 2021 list.
+- 《护生画集》共六集，分别为50、60、70、80、90、100幅，共450幅，为弘一法师五十岁到一百岁祝寿。第一集（1929）、第二集（1940）由弘一法师书写；第三集（1949）叶恭绰书写；第四集（1960）、第六集（1973年画成，1979年出版）朱幼兰书写；第五集（1965）虞愚书写。
+- 《生的扶持》：一蟹失足，二蟹持扶。物知慈悲，人何不如。
+- 《囚徒之歌》：人在牢狱，终日愁欷；鸟在樊笼，终日悲啼。聆此哀音，凄入心脾；何如放舍，任彼高飞。（弘一法师后来改名为《凄音》。）
+- 《母之羽》：雏儿依残羽，殷殷恋慈母。母亡儿不知，犹复相环守。（游戏只引前四句，各版本最后一句略有出入。）
+- 飞蛾绕灯：飞虫会把背朝向最亮的地方来分辨上下（Fabian 等，《自然·通讯》，2024）。
+- 画眉：2021年起列为国家二级保护野生动物。
 
-Inscriptions can vary between editions; please check against the edition used in class.
+不同版本的题字可能略有出入，请以课堂上使用的版本为准。
 
-## 开发 · For developers
+## 开发说明
 
-Plain HTML, CSS and JavaScript with no dependencies or build step.
+纯 HTML、CSS 和 JavaScript，没有依赖，也不需要编译。
 
 ```
-index.html              page shell
-css/style.css           the single paper-and-ink theme
-js/strings.js           every word, in zh and en, plus the quiz pool
-js/paintings.js         Feng Zikai's originals: files, inscriptions, translations
-js/art.js               brush-and-wash SVG drawing kit (tools/gallery.html previews it)
-js/sound.js             Web Audio sounds on the pentatonic scale
-js/core.js              state, router, cat guide, cards, album leaf, saving images
-js/screens/*.js         cover, album, prologue, studio, quiz, teacher page
-js/chapters/*.js        the six pages
-tools/build.mjs         bundles everything into dist/husheng-zhiyue.html
+index.html              页面骨架
+css/style.css           宣纸与水墨的样式
+js/strings.js           游戏里的全部文字和题库
+js/paintings.js         丰子恺原画：文件名、题字、说明
+js/art.js               毛笔与淡彩的 SVG 绘图工具（用 tools/gallery.html 预览）
+js/sound.js             用五声音阶合成的音效
+js/core.js              进度、页面切换、白象、卡片、画页、保存图片
+js/screens/*.js         封面、画册、序章、我的护生画、护生小博士、给老师
+js/chapters/*.js        六个画页
+tools/build.mjs         打包成 dist/husheng-zhiyue.html
 ```
 
-To add a page: create `js/chapters/<name>.js` calling `HS.chapter({ id, key, no, painting, pov, play(ctx) })`, add its words to `js/strings.js` under the same key, and list the script in `index.html`.
+添加新的一页：新建 `js/chapters/<名字>.js`，调用 `HS.chapter({ id, key, no, painting, pov, play(ctx) })`，在 `js/strings.js` 里用同样的 key 加上文字，再把脚本加进 `index.html`。

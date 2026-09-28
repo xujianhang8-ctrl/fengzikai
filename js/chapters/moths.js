@@ -7,7 +7,9 @@
   const WIN = { x: 230, y: 235, r: 150 };
   const LAMP = { x: 700, y: 430, s: 0.95 };
   const FLAME = { x: 701, y: 312 };
-  const GAUZE_HOME = { x: 380, y: 585 };
+  const GAUZE_HOME = { x: 522, y: 424 };
+  const GAUZE_ON = { x: LAMP.x, y: 340 };
+  const GAUZE_S = 0.9;
 
   function room(o = {}) {
     let s = `<rect width="1000" height="625" fill="#ecebe3"/>`;
@@ -25,7 +27,7 @@
     // floor, desk and things on it
     s += A.line([[0, 575], [1000, 580]], 1.4, { op: 0.45 });
     s += A.desk(470, 960, 430, 150);
-    s += A.books(560, 430) + A.brushPot(890, 430) + A.paperStack(800, 430, 3);
+    s += A.books(612, 430) + A.brushPot(890, 430) + A.paperStack(800, 430, 3);
     s += `<ellipse cx="160" cy="590" rx="80" ry="16" fill="${C.indigo}" fill-opacity=".35"/>`;
     s += A.place(A.cat({ pose: 'sleep' }), { x: 160, y: 584, s: 0.9 });
     return s;
@@ -70,13 +72,18 @@
         HS.setPos(lamp, LAMP.x, LAMP.y, 0, LAMP.s);
         const flame = lamp.querySelector('.flame');
         const mothLayer = ctx.layer('moths');
-        const gauze = ctx.add('gauze', A.gauze(), { opacity: '0', class: 'hit' });
+        const ghost = ctx.add('ghost', `<g class="blink-soft"><path d="M-30-86L-30 0C-30 7 30 7 30 0L30-86" fill="none" stroke="${C.seal}" stroke-width="2.4" stroke-dasharray="7 6"/><ellipse cx="0" cy="-86" rx="30" ry="7" fill="none" stroke="${C.seal}" stroke-width="2.4" stroke-dasharray="7 6"/></g>`, { opacity: '0', 'pointer-events': 'none' });
+        HS.setPos(ghost, GAUZE_ON.x, GAUZE_ON.y, 0, GAUZE_S);
+        // outer group holds the position; the inner group pulses (a CSS transform on the outer one would override its position)
+        const gauze = ctx.add('gauze', `<g class="gauze-inner">${A.gauze()}</g>`, { opacity: '0', class: 'hit' });
+        const gauzeInner = gauze.querySelector('.gauze-inner');
 
         const total = ctx.easy ? 9 : 12;
         const moths = [];
         let spawned = 0, saved = 0, burned = 0, spawnClock = 1.2, elapsed = 0;
-        let gauzeState = 'hidden'; // hidden → offered → dragging → on
-        let lampOn = true, ended = false, cueClock = 0, asked = false;
+        let gauzeState = 'hidden'; // hidden → offered → dragging → flying → on
+        let lampOn = true, ended = false, cueClock = 0, asked = false, onClock = 0;
+        let gx = GAUZE_HOME.x, gy = GAUZE_HOME.y;
         const stat = () => ctx.stat(t('moth.stat', { a: saved, b: burned }));
         stat();
 
@@ -98,11 +105,44 @@
 
         function offerGauze() {
           gauzeState = 'offered';
+          gx = GAUZE_HOME.x; gy = GAUZE_HOME.y;
+          HS.setPos(gauze, gx, gy, 0, GAUZE_S);
           gauze.setAttribute('opacity', '1');
-          gauze.classList.add('pulse');
-          HS.setPos(gauze, GAUZE_HOME.x, GAUZE_HOME.y, 0, 0.9);
+          ghost.setAttribute('opacity', '1');
+          gauzeInner.classList.add('pulse');
           ctx.say(t('moth.gauzeCue'), 5200);
           Sound.good();
+        }
+
+        /* Is a scene point on the gauze shade, as drawn right now? */
+        function onGauze(p) {
+          const pad = 22 * ctx.reach;
+          return p.x > gx - 30 * GAUZE_S - pad && p.x < gx + 30 * GAUZE_S + pad && p.y > gy - 92 * GAUZE_S - pad && p.y < gy + 10 * GAUZE_S + pad;
+        }
+
+        function putGauzeOn() {
+          gauzeState = 'on';
+          onClock = 0;
+          gx = GAUZE_ON.x; gy = GAUZE_ON.y;
+          HS.setPos(gauze, gx, gy, 0, GAUZE_S);
+          gauzeInner.classList.remove('pulse');
+          ghost.setAttribute('opacity', '0');
+          Sound.stamp();
+          ctx.say(t('moth.gauzeOn'), 4200);
+        }
+
+        /* A tap (or Enter) glides the shade onto the lamp, for anyone who finds dragging hard. */
+        function glideGauze() {
+          gauzeState = 'flying';
+          gauzeInner.classList.remove('pulse');
+          const x0 = gx, y0 = gy;
+          let k = 0;
+          const stop = ctx.loop((dt) => {
+            k = Math.min(1, k + dt * 2.2);
+            const e = 1 - (1 - k) * (1 - k);
+            HS.setPos(gauze, HS.lerp(x0, GAUZE_ON.x, e), HS.lerp(y0, GAUZE_ON.y, e) - Math.sin(k * Math.PI) * 60, 0, GAUZE_S);
+            if (k >= 1) { stop(); putGauzeOn(); }
+          });
         }
 
         function lampOut() {
@@ -121,61 +161,66 @@
           });
         }
 
-        // pointer: tap moths; drag the gauze shade onto the lamp; tap the flame to blow it out at the end
+        // pointer: tap moths; drag (or tap) the gauze shade onto the lamp; tap the flame to blow it out at the end
         let drag = null;
         ctx.on(ctx.svg, 'pointerdown', (e) => {
           if (ended) return;
           e.preventDefault();
           const p = ctx.point(e);
-          if ((gauzeState === 'offered') && HS.dist(p.x, p.y, gaX(), gaY() - 38) < 70) {
+          if (gauzeState === 'offered' && onGauze(p)) {
             gauzeState = 'dragging';
-            gauze.classList.remove('pulse');
-            drag = { dx: gaX() - p.x, dy: gaY() - p.y };
+            gauzeInner.classList.remove('pulse');
+            drag = { dx: gx - p.x, dy: gy - p.y, x0: p.x, y0: p.y, moved: false };
             try { ctx.svg.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
             ctx.svg.classList.add('is-dragging');
+            Sound.tap();
             return;
           }
           const m = moths.filter((q) => q.state === 'in' || q.state === 'circle').sort((a, b) => HS.dist(a.x, a.y, p.x, p.y) - HS.dist(b.x, b.y, p.x, p.y))[0];
           if (m && HS.dist(m.x, m.y, p.x, p.y) < 44 * ctx.reach) { guide(m); return; }
-          if (asked && lampOn && HS.dist(p.x, p.y, FLAME.x, FLAME.y) < 50) lampOut();
+          if (asked && lampOn && HS.dist(p.x, p.y, FLAME.x, FLAME.y) < 60) {
+            ctx.overlay.querySelectorAll('.card').forEach((c) => c.remove());
+            lampOut();
+          }
         });
-        let gx = GAUZE_HOME.x, gy = GAUZE_HOME.y;
-        const gaX = () => gx, gaY = () => gy;
         ctx.on(ctx.svg, 'pointermove', (e) => {
           if (gauzeState !== 'dragging' || !drag) return;
           const p = ctx.point(e);
-          gx = p.x + drag.dx; gy = p.y + drag.dy;
-          HS.setPos(gauze, gx, gy, 0, 0.9);
+          if (HS.dist(p.x, p.y, drag.x0, drag.y0) > 8) drag.moved = true;
+          gx = HS.clamp(p.x + drag.dx, 40, 960);
+          gy = HS.clamp(p.y + drag.dy, 110, 600);
+          HS.setPos(gauze, gx, gy, 0, GAUZE_S);
         });
         const drop = () => {
           if (gauzeState !== 'dragging') return;
           ctx.svg.classList.remove('is-dragging');
+          const moved = drag && drag.moved;
           drag = null;
-          if (HS.dist(gx, gy - 40, FLAME.x, FLAME.y) < 95) {
-            gauzeState = 'on';
-            gx = LAMP.x; gy = 340;
-            HS.setPos(gauze, gx, gy, 0, 0.9);
-            Sound.stamp();
-            ctx.say(t('moth.gauzeOn'), 4200);
-          } else {
+          if (!moved) { glideGauze(); return; }
+          if (HS.dist(gx, gy, GAUZE_ON.x, GAUZE_ON.y) < 120) putGauzeOn();
+          else {
             gauzeState = 'offered';
-            gauze.classList.add('pulse');
+            gauzeInner.classList.add('pulse');
           }
         };
         ctx.on(ctx.svg, 'pointerup', drop);
         ctx.on(ctx.svg, 'pointercancel', drop);
+        ctx.on(window, 'keydown', (e) => {
+          if (gauzeState === 'offered' && (e.key === 'Enter' || e.key === ' ') && !/input|textarea|button/i.test(e.target.tagName)) { e.preventDefault(); glideGauze(); }
+        });
 
         const stopLoop = ctx.loop((dt, now) => {
           elapsed += dt;
           spawnClock -= dt;
           const alive = moths.filter((m) => m.state !== 'gone').length;
-          if (lampOn && spawned < total && spawnClock <= 0 && alive < 4) { spawn(); spawnClock = (ctx.easy ? 4.2 : 3.2) + Math.random(); }
+          if (lampOn && !asked && spawned < total && spawnClock <= 0 && alive < 4) { spawn(); spawnClock = (ctx.easy ? 4.2 : 3.2) + Math.random(); }
           if (gauzeState === 'hidden' && (saved + burned >= 6 || elapsed > 28)) offerGauze();
           if (gauzeState === 'offered') {
             cueClock += dt;
             if (cueClock > 9) { cueClock = 0; ctx.say(t('moth.gauzeCue'), 4000); }
           }
-          if (gauzeState === 'on' && !asked && spawned >= total && lampOn) {
+          if (gauzeState === 'on') onClock += dt;
+          if (gauzeState === 'on' && !asked && lampOn && onClock > 3.5) {
             asked = true;
             ctx.card({ body: [t('moth.moonAsk')], button: t('moth.blow') }).then(() => { if (lampOn) lampOut(); });
           }

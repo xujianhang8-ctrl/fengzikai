@@ -12,13 +12,7 @@
   HS.NS = NS;
 
   /* ---------- state (kept in this browser only) ---------- */
-  function detectLang() {
-    try {
-      const l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
-      return /^zh/i.test(l) ? 'zh' : 'en';
-    } catch (e) { return 'zh'; }
-  }
-  const fresh = () => ({ lang: detectLang(), name: '', sound: true, easy: false, pages: {}, prologue: false, quiz: { best: 0, passed: false } });
+  const fresh = () => ({ name: '', sound: true, easy: false, pages: {}, prologue: false, quiz: { best: 0, passed: false } });
 
   function load() {
     let saved = null;
@@ -26,7 +20,6 @@
     const s = Object.assign(fresh(), saved && typeof saved === 'object' ? saved : {});
     if (!s.pages || typeof s.pages !== 'object') s.pages = {};
     if (!s.quiz || typeof s.quiz !== 'object') s.quiz = { best: 0, passed: false };
-    if (s.lang !== 'zh' && s.lang !== 'en') s.lang = detectLang();
     return s;
   }
   HS.state = load();
@@ -34,9 +27,7 @@
   HS.loadDraft = () => { try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (e) { return null; } };
   HS.saveDraft = (d) => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); return true; } catch (e) { return false; } };
   HS.reset = () => {
-    const lang = HS.state.lang;
     HS.state = fresh();
-    HS.state.lang = lang;
     try { localStorage.removeItem(KEY); localStorage.removeItem(DRAFT_KEY); } catch (e) { /* ignore */ }
     HS.save();
   };
@@ -52,27 +43,18 @@
 
   /* ---------- words ---------- */
   HS.t = function (key, vars) {
-    const d = window.STR[HS.state.lang] || window.STR.zh;
-    let v = d[key];
-    if (v === undefined) v = window.STR.zh[key];
+    let v = window.STR.zh[key];
     if (v === undefined) return key;
     if (vars && typeof v === 'string') v = v.replace(/\{(\w+)\}/g, (m, k) => (vars[k] !== undefined ? vars[k] : m));
     return v;
   };
   HS.zh = (key) => window.STR.zh[key];
-  HS.en = () => HS.state.lang === 'en';
   const ZH_NUM = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-  HS.pageNo = (n) => HS.t('ui.pageN', { n: HS.en() ? n : ZH_NUM[n] || n });
+  HS.pageNo = (n) => HS.t('ui.pageN', { n: ZH_NUM[n] || n });
 
   HS.applyLang = function () {
-    document.documentElement.lang = HS.en() ? 'en' : 'zh-CN';
-    document.title = HS.en() ? '护生之约 · A Promise to Protect Life' : '护生之约';
-  };
-  HS.setLang = function (lang) {
-    HS.state.lang = lang;
-    HS.save();
-    HS.applyLang();
-    HS.go(current || 'title', { keepHash: true });
+    document.documentElement.lang = 'zh-CN';
+    document.title = '护生之约';
   };
 
   /* ---------- DOM helpers ---------- */
@@ -152,13 +134,6 @@
     });
     paint();
     return b;
-  };
-
-  HS.langButton = function () {
-    return h('button', {
-      class: 'btn btn-small', type: 'button', lang: HS.en() ? 'zh-CN' : 'en',
-      onclick: () => HS.setLang(HS.en() ? 'zh' : 'en'),
-    }, HS.t('ui.lang'));
   };
 
   /* ---------- toast & modal ---------- */
@@ -542,7 +517,7 @@
   }
 
   function buildLeaf(def, seals, showOriginal) {
-    const t = HS.t, k = def.key, en = HS.en();
+    const t = HS.t, k = def.key;
     const orig = def.original ? HS.painting(def.original) : null;
     const sealBox = h('div', { class: 'leafpage-seals' });
     let art, inscription, verseLine;
@@ -550,36 +525,32 @@
       art = h('div', { class: 'leafpage-art is-original' }, HS.original(def.original), sealBox);
       inscription = inscriptionBlock(orig.title, orig.poem, orig.poemBy);
       verseLine = h('div', { class: 'leafpage-orig-note' },
-        h('p', { class: 'eyebrow', style: 'color:var(--seal)' }, t('orig.unlocked')),
-        en && orig.poemEn ? h('p', { class: 'leafpage-verse-en' }, `“${orig.poemEn}” — ${orig.poemByEn}`) : null);
+        h('p', { class: 'eyebrow', style: 'color:var(--seal)' }, t('orig.unlocked')));
     } else {
       art = h('div', { class: 'leafpage-art', html: Art.svg(def.painting(), 1000, 625, { label: t(k + '.title') }) }, sealBox);
       inscription = inscriptionBlock(HS.zh(k + '.title'), HS.zh(k + '.verse'), '—— ' + HS.zh(k + '.verseBy'));
-      verseLine = en
-        ? h('p', { class: 'leafpage-verse-en' }, `“${t(k + '.verseEn')}” — ${t(k + '.verseBy')}`)
-        : h('p', { class: 'muted' }, t(k + '.verseGloss'));
+      verseLine = h('p', { class: 'muted' }, t(k + '.verseGloss'));
     }
     const top = h('div', { class: 'leafpage-top' }, art, inscription);
     const cards = [];
     if (orig) {
       cards.push(h('div', { class: 'info info-orig' },
         h('h3', {}, `${t('orig.heading')}《${orig.title}》`),
-        h('p', { class: 'reveal-sub' }, en ? `${orig.titleEn} · ${orig.sourceEn}` : orig.source),
+        h('p', { class: 'reveal-sub' }, orig.source),
         showOriginal ? null : h('p', { class: 'poem-zh', lang: 'zh-CN', style: 'font-size:1.15rem' }, orig.poem),
-        showOriginal || !en ? null : h('p', { class: 'poem-en' }, orig.poemEn),
-        orig.note ? h('p', {}, en ? orig.noteEn : orig.note) : null));
+        orig.note ? h('p', {}, orig.note) : null));
     }
     cards.push(h('div', { class: 'info' }, h('h3', {}, t('ui.know')), h('p', {}, t(k + '.know'))));
     cards.push(h('div', { class: 'info' }, h('h3', {}, t(def.bookLabel || 'ui.fromBook')), h('p', {}, t(k + '.book'))));
     if (orig && showOriginal) {
       cards.push(h('div', { class: 'info' }, h('h3', {}, t('leaf.verseCard')),
         h('p', { class: 'poem-zh', lang: 'zh-CN', style: 'font-size:1.15rem' }, HS.zh(k + '.verse')),
-        h('p', {}, en ? `“${t(k + '.verseEn')}” — ${t(k + '.verseBy')}` : `${t(k + '.verseGloss')}（${HS.zh(k + '.verseBy')}）`)));
+        h('p', {}, `${t(k + '.verseGloss')}（${t(k + '.verseBy')}）`)));
     }
     const info = h('div', { class: 'leafpage-info' }, cards);
     const why = t(seals >= 3 ? 'ch.sealWhy3' : seals === 2 ? 'ch.sealWhy2' : 'ch.sealWhy1');
     const foot = h('div', { class: 'leafpage-foot' },
-      h('div', { class: 'got' }, HS.sealsRow(seals), h('span', {}, t('ch.sealsGot', { n: seals }) + (en ? '. ' : '。') + why)),
+      h('div', { class: 'got' }, HS.sealsRow(seals), h('span', {}, t('ch.sealsGot', { n: seals }) + '。' + why)),
       h('div', { class: 'toolbar' },
         h('button', { class: 'btn', type: 'button', onclick: () => { HS.closeModal(); HS.go(def.id); } }, t('ch.replay')),
         h('button', { class: 'btn btn-seal', type: 'button', 'data-autofocus': '', onclick: () => { HS.closeModal(); Sound.page(); HS.go('album', { highlight: def.id }); } }, t('ui.collect'))));
@@ -627,22 +598,20 @@
   HS.original = function (id, opts = {}) {
     const p = HS.painting(id);
     if (!p) return h('div');
-    const en = HS.en();
     const frame = h('div', { class: 'original-frame' });
     const badge = h('span', { class: 'original-badge' });
     const caption = h('figcaption', { class: 'original-cap' },
       opts.hideTitle ? null : h('span', { class: 'original-title', lang: 'zh-CN' }, `《${p.title}》`),
-      opts.hideTitle || !en ? null : h('span', { class: 'original-title-en' }, p.titleEn),
-      h('span', { class: 'original-src' }, en ? p.sourceEn : p.source),
+      h('span', { class: 'original-src' }, p.source),
       badge);
     const fig = h('figure', { class: 'original' + (opts.compact ? ' is-compact' : '') }, h('div', { class: 'mount' }, frame), caption);
     const showSketch = () => {
-      frame.innerHTML = opts.sketch ? Art.svg(opts.sketch, 1000, 700, { label: en ? p.titleEn : p.title }) : '';
+      frame.innerHTML = opts.sketch ? Art.svg(opts.sketch, 1000, 700, { label: p.title }) : '';
       frame.classList.add('is-sketch');
       badge.textContent = HS.t('orig.sketch');
       fig.dataset.state = 'sketch';
     };
-    const img = h('img', { alt: en ? `${p.titleEn} — ${HS.t('orig.by')}` : `${p.title}，${HS.t('orig.by')}`, decoding: 'async' });
+    const img = h('img', { alt: `${p.title}，${HS.t('orig.by')}`, decoding: 'async' });
     frame.appendChild(img);
     badge.textContent = HS.t('orig.real');
     fig.dataset.state = 'loading';
@@ -656,12 +625,10 @@
   HS.originalText = function (id) {
     const p = HS.painting(id);
     if (!p || !p.poem) return null;
-    const en = HS.en();
     return h('div', { class: 'original-text' },
       h('p', { class: 'poem-zh', lang: 'zh-CN' }, p.poem),
-      h('p', { class: 'reveal-sub' }, en ? p.poemByEn : p.poemBy),
-      en && p.poemEn ? h('p', { class: 'poem-en' }, p.poemEn) : null,
-      p.note ? h('p', { class: 'muted', style: 'font-size:.95rem' }, en ? p.noteEn : p.note) : null);
+      h('p', { class: 'reveal-sub' }, p.poemBy),
+      p.note ? h('p', { class: 'muted', style: 'font-size:.95rem' }, p.note) : null);
   };
 
   /* ---------- canvas helpers shared by the studio and the certificate ---------- */

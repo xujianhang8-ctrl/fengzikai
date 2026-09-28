@@ -7,7 +7,7 @@
 <meta name="description" content="一个关于丰子恺《护生画集》的课堂小游戏：扫地不伤蚂蚁、清理池塘、给油灯罩上纱罩、送雏鸟回巢、打开笼门、学会读画，再画一幅自己的护生画。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400&family=Caveat+Brush&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap">
 <style>
 /* 护生之约 · style.css
  * One visual world: rice paper (宣纸), ink (墨), vermilion seals (朱砂)
@@ -35,17 +35,10 @@
 
   --f-brush: "Ma Shan Zheng", "STKaiti", "KaiTi", "Kaiti SC", "BiauKai", serif;
   --f-zh: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
-  --f-en: "Andika", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
-  --f-en-brush: "Caveat Brush", "Ma Shan Zheng", cursive;
   --f-text: var(--f-zh);
   --f-title: var(--f-brush);
 
   --paper-tex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .36 0 0 0 0 .27 0 0 0 .075 0'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .44 0 0 0 0 .33 0 0 0 .09 -.02'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
-}
-
-html[lang="en"] {
-  --f-text: var(--f-en);
-  --f-title: var(--f-en-brush);
 }
 
 * { box-sizing: border-box; }
@@ -65,7 +58,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-html[lang="en"] body { line-height: 1.55; }
 
 #app { min-height: 100%; display: flex; flex-direction: column; }
 #screen { flex: 1; display: flex; flex-direction: column; outline: none; min-height: 0; }
@@ -106,7 +98,6 @@ img, svg { max-width: 100%; }
   text-decoration: none;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
-html[lang="en"] .btn { font-size: 1.2rem; letter-spacing: 0.01em; }
 .btn:hover { transform: translateY(-1px); background: #fffaf0; }
 .btn:active { transform: translateY(1px); }
 .btn[disabled] { opacity: 0.45; cursor: not-allowed; transform: none; }
@@ -357,11 +348,9 @@ body.is-playing #screen { min-height: 0; }
 .original-frame.is-sketch svg { display: block; width: 100%; height: auto; }
 .original-cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.7rem; font-size: 0.9rem; color: var(--ink-2); }
 .original-title { font-family: var(--f-brush); font-size: 1.3rem; color: var(--ink); }
-.original-title-en { font-style: italic; }
 .original-badge { margin-left: auto; font-size: 0.78rem; letter-spacing: 0.06em; padding: 0.05rem 0.5rem; border: 1px solid currentColor; color: var(--seal-deep); }
 .original[data-state="sketch"] .original-badge { color: var(--ink-3); border-style: dashed; }
 .original-text { display: grid; gap: 0.4rem; }
-.leafpage-verse-en { font-style: italic; color: var(--ink-2); }
 .leafpage-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 0.8rem 1.4rem; }
 .info h3 { font-size: 1.2rem; color: var(--seal-deep); margin-bottom: 0.2rem; }
 .info-orig { grid-column: 1 / -1; background: var(--paper); border: 1px solid rgba(181, 54, 44, 0.35); padding: 0.7rem 0.95rem; display: grid; gap: 0.3rem; }
@@ -375,7 +364,6 @@ body.is-playing #screen { min-height: 0; }
   .inscription .v-title, .inscription .v-col, .inscription .v-by { writing-mode: horizontal-tb; }
   .inscription .v-by { align-self: flex-start; }
 }
-html[lang="en"] .inscription .v-by { writing-mode: horizontal-tb; }
 
 /* ---------- prologue picture book ---------- */
 .book { width: 100%; max-width: 1080px; margin: 0 auto; padding: 16px 16px 36px; display: flex; flex-direction: column; gap: 1rem; }
@@ -399,7 +387,6 @@ html[lang="en"] .inscription .v-by { writing-mode: horizontal-tb; }
 }
 .vol:hover { transform: translateY(-4px); }
 .vol[aria-pressed="true"] { transform: translateY(-8px); outline: 2px solid var(--seal); outline-offset: 2px; }
-html[lang="en"] .vol { writing-mode: horizontal-tb; font-family: var(--f-en); font-size: 0.8rem; justify-content: center; align-items: flex-end; padding: 6px 2px; letter-spacing: 0; }
 .vol-info { min-height: 5.4rem; background: var(--paper-hi); border: 1px solid rgba(38, 34, 30, 0.25); padding: 0.6rem 0.9rem; font-size: 0.98rem; }
 .vol-info b { font-family: var(--f-title); font-weight: 400; font-size: 1.2rem; }
 @media (max-width: 760px) {
@@ -420,7 +407,6 @@ html[lang="en"] .vol { writing-mode: horizontal-tb; font-family: var(--f-en); fo
 .reveal-title { font-family: var(--f-brush); font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.2; }
 .reveal-sub { font-size: 0.95rem; color: var(--ink-3); }
 .poem-zh { font-family: var(--f-brush); font-size: 1.35rem; line-height: 1.6; color: var(--ink); }
-.poem-en { font-style: italic; color: var(--ink-2); font-size: 0.98rem; }
 .quote { border-left: 3px solid var(--seal); padding-left: 0.8rem; color: var(--ink-2); }
 @media (max-width: 760px) { .riddle { grid-template-columns: 1fr; } }
 
@@ -459,7 +445,7 @@ input[type="range"] { width: 100%; accent-color: var(--seal); }
 .quiz { width: 100%; max-width: 760px; margin: 0 auto; padding: 18px 16px 40px; display: flex; flex-direction: column; gap: 1rem; }
 .quiz-card { background: var(--paper-hi); border: 1px solid rgba(38, 34, 30, 0.25); padding: clamp(16px, 3vw, 28px); display: grid; gap: 0.9rem; animation: page-in 0.35s ease both; }
 .quiz-card h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-family: var(--f-text); font-weight: 600; line-height: 1.45; }
-html:not([lang="en"]) .quiz-card h2 { font-family: var(--f-brush); font-weight: 400; }
+.quiz-card h2 { font-family: var(--f-brush); font-weight: 400; }
 .quiz-meta { display: flex; justify-content: space-between; color: var(--ink-3); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
 .bar { height: 6px; background: var(--paper-lo); }
 .bar i { display: block; height: 100%; background: var(--seal); transition: width 0.3s ease; }
@@ -495,6 +481,7 @@ html:not([lang="en"]) .quiz-card h2 { font-family: var(--f-brush); font-weight: 
 .wing-down { animation: wing 0.24s steps(1) infinite reverse; }
 .float-text { font-family: var(--f-title); paint-order: stroke; stroke: var(--paper-hi); stroke-width: 6px; stroke-linejoin: round; }
 .pulse { animation: pulse 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+.blink-soft { animation: blink-soft 1.4s ease-in-out infinite; }
 
 @keyframes sway { from { transform: rotate(-1.6deg); } to { transform: rotate(1.8deg); } }
 @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
@@ -503,6 +490,7 @@ html:not([lang="en"]) .quiz-card h2 { font-family: var(--f-brush); font-weight: 
 @keyframes tail { from { transform: skewY(-12deg); } to { transform: skewY(12deg); } }
 @keyframes flap { from { transform: scaleX(1); } to { transform: scaleX(0.45); } }
 @keyframes wing { 0% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes blink-soft { 0%, 100% { opacity: 0.9; } 50% { opacity: 0.3; } }
 @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.12); opacity: 0.75; } }
 @keyframes card-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes page-in { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
@@ -512,7 +500,7 @@ html:not([lang="en"]) .quiz-card h2 { font-family: var(--f-brush); font-weight: 
 @keyframes toast { 0% { opacity: 0; transform: translateY(8px); } 10%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .willow-branch, .cat-eyes, .flame, .fish-tail, .bf-wings, .pulse { animation: none; }
+  .willow-branch, .cat-eyes, .flame, .fish-tail, .bf-wings, .pulse, .blink-soft { animation: none; }
   .card, .book-page, .riddle, .leafpage, .scrim, .quiz-card, .reveal-block, .result { animation: none; }
   .stamp { animation-duration: 0.01s; }
   .leaf-btn .mount, .btn { transition: none; }
@@ -524,13 +512,10 @@ html:not([lang="en"]) .quiz-card h2 { font-family: var(--f-brush); font-weight: 
 <div id="app"><main id="screen" tabindex="-1"></main></div>
 <div id="modal-root"></div>
 <div id="toast-root" aria-live="polite"></div>
-<noscript><p style="padding:16px">这个游戏需要启用 JavaScript。 · This game needs JavaScript turned on.</p></noscript>
+<noscript><p style="padding:16px">这个游戏需要启用 JavaScript 才能运行。</p></noscript>
 <script>
 /* 护生之约 · strings.js
- * All words in the game, in Chinese (zh) and English (en).
- * Poems and inscriptions are quoted in Chinese in both languages; the English
- * side adds a translation under the key ending in "En".
- * A key missing from `en` falls back to `zh`. */
+ * 游戏里的全部文字（中文）。改文字只需要改这里。 */
 window.STR = {};
 
 STR.zh = {
@@ -555,8 +540,6 @@ STR.zh = {
   'ui.sound': '声音',
   'ui.soundOn': '声音已打开',
   'ui.soundOff': '声音已关闭',
-  'ui.lang': 'English',
-  'ui.langName': '中文',
   'ui.next': '下一页',
   'ui.prev': '上一页',
   'ui.start': '开始',
@@ -715,7 +698,7 @@ STR.zh = {
   'moth.stat': '飞回月光里 {a} · 烫伤 {b}',
   'moth.hot': '太烫了！',
   'moth.saved': '去吧，月光在那边。',
-  'moth.gauzeCue': '白象找来了一个纱罩！把它拖到油灯上罩住。',
+  'moth.gauzeCue': '白象找来了一个纱罩！把它拖到油灯上罩住，也可以直接点一下纱罩。',
   'moth.gauzeOn': '罩上纱罩，灯照样亮，飞蛾却不会被烫伤了。',
   'moth.moonAsk': '今晚的月亮真亮。要不要吹灭油灯，一起看月亮？',
   'moth.blow': '吹灭油灯',
@@ -957,531 +940,64 @@ STR.zh = {
   'teach.resetDone': '进度已清除。',
 };
 
-STR.en = {
-  'app.name': '护生之约',
-  'app.sub': 'Step inside Feng Zikai’s Paintings for the Preservation of Life',
-  'app.lede': 'A blank album, six small lives, and a promise kept for more than forty years.',
-  'app.credit': 'The pictures are original drawings in the spirit of Feng Zikai’s style, not his paintings.',
-
-  'title.start': 'Open the album',
-  'title.continue': 'Continue my album',
-  'title.teacher': 'For teachers',
-  'title.nameLabel': 'Write your name on the album cover',
-  'title.namePh': 'Your name (optional)',
-  'title.nameHint': 'Your name will be carved into a red seal and stamped on your paintings.',
-
-  'ui.album': 'Album',
-  'ui.cover': 'Cover',
-  'ui.backToAlbum': 'Back to the album',
-  'ui.sound': 'Sound',
-  'ui.soundOn': 'Sound on',
-  'ui.soundOff': 'Sound off',
-  'ui.lang': '中文',
-  'ui.langName': 'English',
-  'ui.next': 'Next',
-  'ui.prev': 'Back',
-  'ui.start': 'Start',
-  'ui.continue': 'Continue',
-  'ui.ok': 'OK',
-  'ui.toPage': 'Turn to the page',
-  'ui.collect': 'Add to my album',
-  'ui.again': 'Play again',
-  'ui.close': 'Close',
-  'ui.seals': 'kindness seals',
-  'ui.sealsN': '{n} kindness seals',
-  'ui.pageN': 'Page {n}',
-  'ui.pov': 'If I were it…',
-  'ui.talk': 'Think and talk',
-  'ui.know': 'Did you know?',
-  'ui.fromBook': 'From the collection',
-  'ui.today': 'Protecting life today',
-  'ui.save': 'Save image',
-  'ui.saving': 'Preparing the image…',
-  'ui.saved': 'Image saved.',
-  'ui.saveDeclined': 'Not saved. Tap again whenever you’re ready.',
-  'ui.saveManual': 'Right-click the image (or long-press on a phone) to save it.',
-  'ui.catTap': 'Tap Baixiang the cat for a little story',
-  'ui.catName': 'Baixiang',
-  'ui.meow': 'Meow~',
-  'ui.easyOn': 'Gentle mode is on',
-  'ui.loading': 'Unrolling the scroll…',
-  'ui.close2': 'Hide',
-  'ui.rotate': 'Turn your phone sideways for a bigger picture.',
-
-  'cat.facts': [
-    'Feng Zikai grew up in Shimenwan, a river town in Tongxiang, Zhejiang, full of bridges and willows.',
-    'Feng’s home was called Yuanyuan Hall. Master Hongyi suggested he draw lots for the name, and both times he drew the character 缘 (yuan)!',
-    'The word manhua (comics) caught on in China through “Zikai Manhua,” a collection of Feng’s drawings.',
-    'Feng Zikai loved children. Many of his paintings show his own kids.',
-    'Feng often left the eyes, nose and mouth off the people he painted. Why do you think he did that?',
-    'Do you know Li Shutong’s song “Farewell”? “Beyond the long pavilion, beside the ancient road…”',
-    'My favourite thing is a nap in the sun. Meow~',
-    'If I were it… you can ask yourself that every time you meet a small living thing.',
-  ],
-
-  'orig.real': 'Original by Feng Zikai',
-  'orig.sketch': 'Sketch · scan of the original not added yet',
-  'orig.by': 'painting by Feng Zikai',
-  'orig.heading': 'Feng Zikai’s original painting',
-  'orig.unlocked': 'This page unlocked one of Feng Zikai’s original paintings',
-  'leaf.verseCard': 'A line for this page',
-
-  'album.title': 'My Album of Protecting Life',
-  'album.titleNamed': '{name}’s Album of Protecting Life',
-  'album.progress': '{done} of 6 pages painted · {seals} kindness seals',
-  'album.todo': 'Not painted yet',
-  'album.done': 'Painted',
-  'album.read': 'Read',
-  'album.finish': 'All six pages are painted! Feng Zikai kept his promise to his teacher, and you have finished your own album.',
-  'album.prologue': 'Prologue · A Promise',
-  'album.prologueDesc': 'Feng Zikai’s promise to his teacher',
-  'album.studio': 'Last Page · My Own Painting',
-  'album.studioDesc': 'Paint your own picture, add a poem, and stamp your seal.',
-  'album.quiz': 'The Kindness Quiz',
-  'album.quizDesc': 'Answer the questions and earn your certificate.',
-  'album.quizPassed': 'Certificate earned',
-  'album.hint': 'Paint the pages in order, or start with any page you like.',
-
-  'pro.title': 'A Promise',
-  'pro.p1.t': 'A Young Art Student',
-  'pro.p1': 'More than a hundred years ago, at the Zhejiang First Normal School in Hangzhou, a student named Feng Zikai studied painting and music with his teacher, Li Shutong. Li was gifted at many arts. He even wrote a song that is still sung today, “Farewell”: “Beyond the long pavilion, beside the ancient road, fragrant grass stretches to the sky…”',
-  'pro.p2.t': 'The Teacher Becomes a Monk',
-  'pro.p2': 'In 1918, Li Shutong became a Buddhist monk in Hangzhou, known as Master Hongyi. He gave up almost all of his arts except calligraphy. But he and his student stayed close.',
-  'pro.p3.t': 'Fifty Paintings for a Birthday',
-  'pro.p3': 'In 1929 the teacher turned fifty. As a birthday gift, Feng painted fifty pictures, and the teacher matched each one with a poem in his own calligraphy. Every picture says the same thing: care for all living things. This became Volume One of Paintings for the Preservation of Life.',
-  'pro.p4.t': 'A Promise',
-  'pro.p4': 'Ten years later, for the teacher’s sixtieth birthday, Feng painted sixty more. The teacher wrote to ask for seventy paintings at seventy, eighty at eighty, ninety at ninety, and one hundred at one hundred. Feng wrote back:',
-  'pro.p4.quote': '世寿所许，定当遵嘱。',
-  'pro.p4.gloss': '“As long as my life allows, I will do as you ask.”',
-  'pro.p5.t': 'The Promise Lives On',
-  'pro.p5': 'Master Hongyi died in 1942. But the promise remained. Through war and hard times, Feng kept going, volume after volume: seventy paintings, eighty, ninety…',
-  'pro.p6.t': 'Four Hundred and Fifty',
-  'pro.p6': 'In 1973, Feng quietly finished the last hundred. Six volumes, 450 paintings: it took him more than forty years to keep his word. Tap each volume on the shelf to see its story.',
-  'pro.p7.t': 'Now It’s Your Turn',
-  'pro.p7': 'Feng Zikai said: “To protect life is to protect the heart.” Caring for small lives is also how we keep our own hearts kind. Now this blank album is yours.',
-  'pro.p7.cat': 'Meow! I’m Baixiang, which means “White Elephant.” The Feng family once had a white cat with that name, and Feng wrote an essay about it. Let me keep you company, page by page!',
-  'pro.open': 'Open my album',
-  'pro.shelfHint': 'Tap a volume',
-  'pro.vol': [
-    { n: 'Volume 1', year: '1929', count: '50 paintings', by: 'Poems and calligraphy by Master Hongyi', note: 'For the teacher’s 50th birthday' },
-    { n: 'Volume 2', year: '1940', count: '60 paintings', by: 'Calligraphy by Master Hongyi', note: 'For the teacher’s 60th birthday' },
-    { n: 'Volume 3', year: '1949', count: '70 paintings', by: 'Calligraphy by Ye Gongchuo', note: 'The teacher had died, but the promise lived on' },
-    { n: 'Volume 4', year: '1960', count: '80 paintings', by: 'Calligraphy by Zhu Youlan', note: '' },
-    { n: 'Volume 5', year: '1965', count: '90 paintings', by: 'Calligraphy by Yu Yu', note: '' },
-    { n: 'Volume 6', year: '1973', count: '100 paintings', by: 'Calligraphy by Zhu Youlan', note: 'Finished quietly in hard times; published in 1979' },
-  ],
-
-  'ch.intro': 'The story of this page',
-  'ch.howto': 'How to play',
-  'ch.skipIntro': 'Start now',
-  'ch.done': 'This page is painted!',
-  'ch.sealsGot': 'You earned {n} kindness seals',
-  'ch.sealWhy3': 'You were so careful: every small life is safe.',
-  'ch.sealWhy2': 'Well done! Next time, try going even slower and gentler.',
-  'ch.sealWhy1': 'Painted! Play again and see if you can be a little more careful.',
-  'ch.replay': 'Replay this page',
-
-  'ants.title': 'Sweeping Gently',
-  'ants.animal': 'Ants',
-  'ants.season': 'Spring',
-  'ants.intro': 'Spring. Willow leaves cover the courtyard. Pick up the broom and sweep! But first, look down: a line of tiny guests is on its way home.',
-  'ants.howto': 'Press and drag the broom to sweep leaves away, or tap a leaf to pick it up gently. Don’t touch the ants. Slow is fine!',
-  'ants.stat': 'Leaves {a}/{b} · Ants startled {c}',
-  'ants.oops': 'Oops, you startled it!',
-  'ants.poke': 'Shh, it’s busy getting home.',
-  'ants.rain': 'The ants are moving house… rain must be coming. They need to hurry home.',
-  'ants.gentle': 'Nice and gentle.',
-  'ants.win': 'All clean! And every little ant got home safely.',
-  'ants.povTitle': 'If I were an ant…',
-  'ants.pov': 'If you were an ant, a broom coming down would look like a whole bamboo forest falling from the sky. You’d be carrying one grain of rice, just trying to get home.',
-  'ants.ask': 'Where have you seen ants? What will you do the next time you meet them?',
-  'ants.verseBy': 'Old saying',
-  'ants.verseEn': 'When sweeping, take care not to harm the ants.',
-  'ants.know': 'One ant colony can have thousands of ants, each with a job: some find food, some look after the young. Before rain the air gets damp and ants often move house, which is why a Chinese saying goes: “When ants move house, rain is coming.”',
-  'ants.book': 'The collection is full of small lives like these: ants, butterflies, frogs, little birds. To Feng Zikai, each of them had a home, just as we do.',
-
-  'pond.title': 'A Clear Pond',
-  'pond.animal': 'Fish',
-  'pond.season': 'Summer',
-  'pond.intro': 'In summer, the pond is home to the fish. But someone has thrown trash into the water, and one fish is caught in an old fishing line.',
-  'pond.howto': 'Tap trash in the water to scoop it out with the net. Careful not to scoop the fish! Tap the fish caught in fishing line to set it free.',
-  'pond.stat': 'Trash {a}/{b} · Freed {c}/1 · Fish startled {d}',
-  'pond.oops': 'The fish got a fright!',
-  'pond.freed': 'Free! It can swim easily again.',
-  'pond.tangledHint': 'That fish is caught in fishing line. Tap it!',
-  'pond.win': 'The water is clear. The fish have their home back.',
-  'pond.povTitle': 'If I were a fish…',
-  'pond.pov': 'If you were a fish, a plastic bag floating overhead would be like a dark cloud that never goes away.',
-  'pond.ask': 'Is there a river, pond or stream near your home? What could make life better for the creatures there?',
-  'pond.verseBy': 'Du Fu',
-  'pond.verseEn': 'In the fine rain, fish rise to the surface; in the light breeze, swallows glide aslant.',
-  'pond.know': 'Some people buy fish to “set them free.” But releasing fish from somewhere else into a river can harm the creatures already living there. The best way to protect life is to protect its home: keep the water clean.',
-  'pond.book': 'In Feng Zikai’s day there was nowhere near this much plastic in the water. Today, protecting life also means looking after rivers, forests and the sky.',
-
-  'moth.title': 'The Gauze Lamp',
-  'moth.animal': 'Moths',
-  'moth.season': 'Summer night',
-  'moth.intro': 'A summer night. An oil lamp burns on the desk. Moths drift in through the window, one after another, heading straight for the flame…',
-  'moth.howto': 'Tap a moth to guide it back out the window into the moonlight. Don’t let it touch the flame!',
-  'moth.stat': 'Guided out {a} · Burned {b}',
-  'moth.hot': 'Too hot!',
-  'moth.saved': 'Off you go: the moonlight is that way.',
-  'moth.gauzeCue': 'Baixiang found a gauze shade! Drag it over the lamp.',
-  'moth.gauzeOn': 'With the shade on, the lamp still shines, but the moths can’t get burned.',
-  'moth.moonAsk': 'The moon is so bright tonight. Shall we blow out the lamp and watch it together?',
-  'moth.blow': 'Blow out the lamp',
-  'moth.win': 'The lamp is out, and the moths have all flown off into the moonlight.',
-  'moth.povTitle': 'If I were a moth…',
-  'moth.pov': 'If you were a moth, that bright flame would be a puzzle that makes you forget which way is up. You could only circle it, round and round.',
-  'moth.ask': 'The gauze shade is a small invention that protects small lives. Can you think of other clever ideas like it?',
-  'moth.verseBy': 'Su Shi',
-  'moth.verseEn': 'Always leave some rice out for the mice; out of pity for the moths, leave the lamp unlit.',
-  'moth.know': 'Why do moths circle lamps? Scientists have found that flying insects keep their backs turned toward the brightest light to tell up from down. A lamp confuses them, so they fly round and round it. So switch off lights you don’t need at night.',
-  'moth.book': 'Remember the old saying on page one, “When sweeping, take care not to harm the ants”? Its next line is “Cherish the moths: put a gauze shade on the lamp.”',
-
-  'nest.title': 'Waiting for Mother',
-  'nest.animal': 'Chicks',
-  'nest.season': 'Autumn',
-  'nest.intro': 'Autumn. There is a nest high in a big tree. The mother bird has flown off to find insects, and her chicks are waiting for her. Down below, a boy raises his slingshot…',
-  'nest.boy1': 'Watch me knock that bird off the branch!',
-  'nest.ask': 'How will you talk him out of it?',
-  'nest.opt1': 'Stop! I’m telling the teacher!',
-  'nest.res1': 'Hmph. The teacher isn’t here.',
-  'nest.hint1': 'Scaring him just means he’ll do it when no one is looking. Try another way?',
-  'nest.opt2': 'Shh, listen. There are chicks up in the tree. They’re waiting for their mother to come home.',
-  'nest.res2': '…That bird is their mother?',
-  'nest.opt3': 'Hitting birds is boring. Let’s go play football!',
-  'nest.res3': 'But I want to hit birds.',
-  'nest.hint3': 'A new game won’t stop him tomorrow. He needs to understand it for himself.',
-  'nest.good': 'He lowers the slingshot. The poet Bai Juyi wrote a poem about exactly this:',
-  'nest.poemBy': 'Bai Juyi, “Birds”',
-  'nest.poemEn': 'Who says the lives of creatures are small? They have the same flesh and bone, the same skin as ours. I urge you, do not strike the bird on the branch: its young in the nest are watching for their mother to come home.',
-  'nest.wind': 'Suddenly, a strong gust of wind! A chick tumbles out of the nest.',
-  'nest.boy2': 'Let’s put it back together!',
-  'nest.howto': 'Press and hold the chick, then carry it slowly back to the nest. Too fast and it gets scared; bumping a branch hurts.',
-  'nest.stat': 'Scared {a} · Bumps {b}',
-  'nest.fearLabel': 'How scared is the chick?',
-  'nest.fast': 'Slower… it’s trembling. Stop for a moment and let it calm down.',
-  'nest.calm': 'There. It isn’t scared any more.',
-  'nest.bump': 'Watch the branch!',
-  'nest.win': 'The mother bird is back! The family is together again.',
-  'nest.povTitle': 'If I were a chick…',
-  'nest.pov': 'If you were a chick that just fell from the nest, the ground would feel huge and cold, and your mother would be nowhere in sight. All you could do is call and call.',
-  'nest.ask2': 'When you want someone to stop hurting a living thing, what way of speaking works best? Why?',
-  'nest.verseBy': 'Bai Juyi, “Birds”',
-  'nest.verseEn': 'Do not strike the bird on the branch: its young in the nest are waiting for their mother.',
-  'nest.know': 'If you find a young bird on the ground that has most of its feathers and can hop, it is probably learning to fly, and its parents are close by. Watch from a distance and leave it alone. Only a chick without proper feathers that has fallen out needs to be put back. And the idea that parent birds abandon a chick touched by people is a myth.',
-  'nest.book': 'Feng Zikai painted many mother birds with their young. On page six, “Reading Paintings,” you’ll see one of the most moving.',
-
-  'cage.title': 'The Cage Door',
-  'cage.animal': 'Thrush',
-  'cage.season': 'Winter',
-  'cage.intro': 'A birdcage hangs under the eaves. Inside is a hwamei thrush that was caught in the hills. Every day it “sings” in its cage…',
-  'cage.intro2': 'This time, you are the thrush in the cage.',
-  'cage.howto': 'Tap the picture or press Space to flap. Tap the left or right side, or use the arrow keys, to fly left or right.',
-  'cage.bump': 'Bump!',
-  'cage.th1': 'It’s so big out there…',
-  'cage.th2': 'My friends are calling me…',
-  'cage.th3': 'The sky is so big, and I have only this much.',
-  'cage.outside': 'Now you’re back outside the cage. What will you do?',
-  'cage.opt1': 'Give it more seed and fresh water',
-  'cage.res1': 'It has plenty to eat, but it keeps gazing at the sky. That doesn’t seem to be what it wants most.',
-  'cage.opt2': 'Get a beautiful new cover for the cage',
-  'cage.res2': 'A prettier cage is still a cage.',
-  'cage.opt3': 'Open the cage door',
-  'cage.res3': 'It pauses at the door, then flies up into the big tree and sings with its friends. This time, it really is singing.',
-  'cage.povTitle': 'If I were a thrush…',
-  'cage.pov': 'You were that thrush just now: a few wingbeats and you hit the bars, while the sky outside went on forever.',
-  'cage.ask': 'Is the caged thrush’s “singing” the same as the free thrush’s song? What do you think?',
-  'cage.verseBy': 'Old saying',
-  'cage.verseEn': 'The caged chicken has food, but the cooking pot is near; the wild crane has no grain, but heaven and earth are wide.',
-  'cage.know': 'In China the hwamei thrush is now a protected wild species, and many wild birds may not be caught or sold. But remember: pet birds raised by people, like budgies, can’t survive in the wild, so never just let them go. Caring for them well is the responsible thing to do.',
-  'cage.book': 'Caged birds appear again and again in the collection. Feng Zikai wanted viewers to ask themselves: what if I were that bird?',
-
-  'read.title': 'Reading Paintings',
-  'read.animal': 'Feng’s paintings',
-  'read.season': 'All seasons',
-  'read.intro': 'Feng Zikai’s paintings look simple at first: just a few strokes. Look again, and something stirs in your heart. Let’s learn to “read” them.',
-  'read.tipsTitle': 'Three keys for reading a painting',
-  'read.tip1t': 'A few strokes',
-  'read.tip1': 'Very few lines, but they catch what matters most.',
-  'read.tip2t': 'No faces',
-  'read.tip2': 'His people often have no eyes, nose or mouth, yet you can read their feelings from how they stand and move.',
-  'read.tip3t': 'Poem and picture',
-  'read.tip3': 'The painting and its words together tell the whole story.',
-  'read.note': 'Where a scan of the original is available, you’ll see Feng Zikai’s own painting; otherwise you’ll see a redrawn sketch that follows its composition, labelled as a sketch. If you can, go and see the real paintings!',
-  'read.begin': 'Start reading',
-  'read.look': 'Look closely',
-  'read.wrong': 'Look again at the details?',
-  'read.right': 'You read it!',
-  'read.nextPic': 'Next painting',
-  'read.stat': 'Painting {a} of {b}',
-  'read.r1.q': 'What is the little girl doing?',
-  'read.r1.a': ['Putting shoes on the stool', 'Fixing the stool', 'Hiding the shoes'],
-  'read.r1.titleEn': 'Abao Has Two Feet, the Stool Has Four',
-  'read.r1.text': 'Abao was Feng Zikai’s eldest daughter. Seeing that the stool had four feet, she decided it needed shoes too, slipped shoes onto its legs, and proudly shouted: “Abao has two feet, the stool has four!” To a child, everything has feelings. This painting is not in the collection, but it holds the collection’s seed: putting your heart into other beings, the way a child does.',
-  'read.r1.quoteEn': 'My heart is taken up by four things: the gods and the stars in the sky, and art and children on earth.',
-  'read.r1.quoteBy': 'Feng Zikai, “Sons and Daughters”',
-  'read.r2.q': 'There is a bundle of feathers on the ground. Why are the chicks gathered around it?',
-  'read.r2.a': ['They think it’s their mother', 'They’re playing hide-and-seek', 'There’s rice hidden in the feathers'],
-  'read.r2.titleEn': 'Mother’s Feathers',
-  'read.r2.text': 'This painting is in Volume One of the collection. The feathers belonged to the mother hen. She is gone, but the chicks don’t know it; they still nestle against the feathers they know.',
-  'read.r2.poemEn': 'The chicks cling to the fallen feathers, longing for their loving mother. She has died, and they do not know; still they gather round and keep watch. Thinking of such love, how can our hearts not ache?',
-  'read.r3.q': 'One crab has stumbled. What are the other two doing?',
-  'read.r3.a': ['Helping it up', 'Fighting it', 'Taking its food'],
-  'read.r3.titleEn': 'Helping Each Other Live',
-  'read.r3.text': 'This painting is also in Volume One. Its inscription is just sixteen characters long. It means: even crabs know how to help one another. Should people do any less?',
-  'read.r3.poemEn': 'One crab loses its footing; two crabs hold it up. If creatures know compassion, how can people do less?',
-  'read.win': 'You’ve learned to read Feng Zikai’s paintings. Next, try painting one of your own!',
-  'read.povTitle': 'After reading',
-  'read.pov': 'Not one of these paintings shows a face, yet each one moves us. That was Feng Zikai’s gift: the fewest brushstrokes, the truest feelings.',
-  'read.ask': 'Which of the three do you like best? Does it remind you of anything in your own life?',
-  'read.verseBy': 'Feng Zikai',
-  'read.verseEn': 'To protect life is to protect the heart.',
-  'read.know': 'The word manhua (comics) caught on in China through “Zikai Manhua,” a collection of Feng’s drawings, which is why many people see him as a founder of Chinese manhua.',
-  'read.book': 'Most paintings in the collection work just this way: one picture, one poem, one moment that makes you stop and think.',
-
-  'studio.title': 'My Own Painting',
-  'studio.intro': 'Now you’re the painter! Draw a creature you’ve met, or a life you’d like to protect. The stickers can help.',
-  'studio.brush': 'Brush',
-  'studio.thin': 'Fine',
-  'studio.mid': 'Medium',
-  'studio.thick': 'Bold',
-  'studio.ink': 'Dark ink',
-  'studio.lightInk': 'Light ink',
-  'studio.colors': 'Colour wash',
-  'studio.green': 'Leaf green',
-  'studio.blue': 'Indigo',
-  'studio.ochre': 'Ochre',
-  'studio.red': 'Rouge',
-  'studio.stickers': 'Stickers',
-  'studio.stickerHint': 'Pick a sticker, then tap the paper to place it.',
-  'studio.drawHint': 'Press and drag on the paper to paint.',
-  'studio.size': 'Sticker size',
-  'studio.flip': 'Flip',
-  'studio.undo': 'Undo',
-  'studio.clear': 'Clear',
-  'studio.clearAsk': 'Clear the whole painting?',
-  'studio.yes': 'Clear it',
-  'studio.no': 'Keep it',
-  'studio.words': 'Words',
-  'studio.titleLabel': 'Title',
-  'studio.titlePh': 'e.g. The Ant Going Home',
-  'studio.poemLabel': 'Poem (one line per row, up to four)',
-  'studio.poemPh': 'If I were you,\nI’d want to go home too.',
-  'studio.inspire': 'Give me an idea',
-  'studio.sealLabel': 'Seal text',
-  'studio.sealPh': 'Up to 4 characters, or your initials',
-  'studio.done': 'Finish and mount it',
-  'studio.preview': 'Your painting',
-  'studio.edit': 'Keep editing',
-  'studio.untitled': 'Untitled',
-  'studio.inspirations': [
-    'If I were you,\nI’d want to go home too.',
-    'A tiny ant\nhas a home to go back to.',
-    'I walk softly on the grass\nso every flower can stay.',
-    'I open the window\nand the moth flies home to the moon.',
-    'A bird sings on the branch;\nI listen quietly below.',
-    'One little fish,\none clear pond.',
-  ],
-  'studio.sticker.cat': 'Cat',
-  'studio.sticker.bird': 'Thrush',
-  'studio.sticker.swallow': 'Swallow',
-  'studio.sticker.fish': 'Fish',
-  'studio.sticker.ant': 'Ant',
-  'studio.sticker.butterfly': 'Butterfly',
-  'studio.sticker.chick': 'Chick',
-  'studio.sticker.crab': 'Crab',
-  'studio.sticker.kid': 'Child',
-  'studio.sticker.moon': 'Moon',
-  'studio.sticker.flower': 'Flower',
-  'studio.sticker.willow': 'Willow',
-
-  'quiz.title': 'The Kindness Quiz',
-  'quiz.intro': 'There are {n} questions. Get {pass} right to earn your Little Painter of Life certificate. Wrong answers are fine: every question comes with an explanation.',
-  'quiz.go': 'Start the quiz',
-  'quiz.q': 'Question {a} of {b}',
-  'quiz.right': 'Correct!',
-  'quiz.wrong': 'The answer is: {a}',
-  'quiz.next': 'Next question',
-  'quiz.finish': 'See my score',
-  'quiz.score': 'You got {a} out of {b}',
-  'quiz.pass': 'Wonderful! Here is your certificate.',
-  'quiz.fail': 'So close! Look through your album again, then have another try.',
-  'quiz.retry': 'Try again',
-  'quiz.certBtn': 'See my certificate',
-  'cert.title': 'Little Painter of Life',
-  'cert.word': 'Certificate',
-  'cert.body': '{name} stepped into Feng Zikai’s Paintings for the Preservation of Life, painted {pages} album pages, collected {seals} kindness seals, and passed the Kindness Quiz. May you carry this caring heart into every day.',
-  'cert.anon': 'Our young painter',
-  'cert.quoteEn': 'To protect life is to protect the heart.',
-  'cert.quoteBy': 'Feng Zikai',
-  'cert.issuer': '护生之约 · A Promise to Protect Life',
-
-  'teach.title': 'For Teachers',
-  'teach.who.t': 'Who it’s for',
-  'teach.who': 'Grades 3–8 (about ages 8–14). Each page takes 3–5 minutes; the whole game takes about 40 minutes. It works on computers, tablets, phones and projectors, with nothing to install.',
-  'teach.goals.t': 'Learning goals',
-  'teach.goals': [
-    'Know the story of Feng Zikai’s promise to Master Hongyi, and how six volumes and 450 paintings came to be.',
-    'Learn to “read” a painting: find the feeling and the message in simple lines and an inscription.',
-    'Practise empathy with the question “What if I were it?”',
-    'Connect protecting life to today: habitats, light pollution, and caring for wild animals wisely.',
-    'Create a painting of one’s own, with a short poem.',
-  ],
-  'teach.flow.t': 'A 40-minute lesson',
-  'teach.flow': [
-    'Warm-up (5 min): watch “Prologue · A Promise” together and discuss what “As long as my life allows, I will do as you ask” means.',
-    'Play (15 min): in pairs, each pair paints one or two pages. Ask students to notice the “If I were it…” moment on each page.',
-    'Reading (10 min): play page six, “Reading Paintings,” together on the projector. Ask what the paintings leave out.',
-    'Create (10 min): each student paints their own picture on the last page, adds a poem, and shares it with the class.',
-  ],
-  'teach.ask.t': 'Discussion questions',
-  'teach.about.t': 'About the content',
-  'teach.about': 'All illustrations are original drawings in the spirit of Feng Zikai’s style, not reproductions; the “Reading Paintings” page redraws the compositions of real works. Show the original paintings in class alongside the game. Quotations and dates have been checked carefully, but inscriptions can differ slightly between editions.',
-  'teach.links.t': 'Link straight to a page',
-  'teach.links': 'Add #ants, #pond, #moths, #nest, #cage, #reading, #studio or #quiz to the end of the address to open that page directly.',
-  'teach.orig.t': 'Feng Zikai’s originals',
-  'teach.orig': 'The game shows Feng Zikai’s original paintings: put a scan of each one into the images/paintings/ folder under the file name listed below. If a scan is missing, the game shows a redrawn sketch labelled as a sketch. Status on this device:',
-  'teach.found': 'Original found',
-  'teach.missing': 'No scan yet',
-  'teach.checking': 'Checking…',
-  'teach.rights': 'Feng Zikai died in 1975, so under Chinese copyright law his work entered the public domain on 1 January 2026. Volume 1 of the collection (1929) and his 1920s Zikai Manhua drawings are also public domain in the United States.',
-  'teach.settings.t': 'Settings',
-  'teach.easy': 'Gentle mode',
-  'teach.easyDesc': 'Slower movement and bigger targets, for younger players or anyone who wants more time.',
-  'teach.reset': 'Clear progress on this device',
-  'teach.resetAsk': 'Are you sure? Album pages, seals, painting drafts and certificate records will all be cleared.',
-  'teach.resetYes': 'Clear',
-  'teach.resetNo': 'Keep',
-  'teach.resetDone': 'Progress cleared.',
-};
-
-/* The quiz: each question has a Chinese and an English version.
- * `a` lists the options with the correct one first; the game shuffles them. */
+/* 护生小博士题库：`a` 里第一个是正确答案，游戏会打乱顺序。 */
 window.QUIZ = [
-  {
-    zh: { q: '《护生画集》一共有几集？', a: ['六集', '三集', '十集'], why: '从1929年到1973年，丰子恺一共画了六集。' },
-    en: { q: 'How many volumes does the collection have?', a: ['Six', 'Three', 'Ten'], why: 'Between 1929 and 1973, Feng Zikai painted six volumes.' },
-  },
-  {
-    zh: { q: '六集加起来，一共有多少幅画？', a: ['450幅', '100幅', '1000幅'], why: '50＋60＋70＋80＋90＋100＝450。' },
-    en: { q: 'How many paintings are there in all six volumes?', a: ['450', '100', '1,000'], why: '50 + 60 + 70 + 80 + 90 + 100 = 450.' },
-  },
-  {
-    zh: { q: '丰子恺和谁约定画《护生画集》？', a: ['他的老师弘一法师（李叔同）', '他的学生', '他的邻居'], why: '李叔同是丰子恺的美术和音乐老师，后来出家成了弘一法师。' },
-    en: { q: 'Who did Feng Zikai make his promise to?', a: ['His teacher, Master Hongyi (Li Shutong)', 'His student', 'His neighbour'], why: 'Li Shutong taught Feng art and music, and later became the monk Master Hongyi.' },
-  },
-  {
-    zh: { q: '第一集为什么正好是五十幅？', a: ['为老师五十岁生日祝寿', '纸只够画五十张', '一年有五十个星期'], why: '1929年老师五十岁，丰子恺用五十幅画为他祝寿。' },
-    en: { q: 'Why did Volume One have exactly fifty paintings?', a: ['For the teacher’s fiftieth birthday', 'There was only enough paper for fifty', 'Because a year has fifty weeks'], why: 'The teacher turned fifty in 1929, and Feng painted fifty pictures for his birthday.' },
-  },
-  {
-    zh: { q: '丰子恺回信说“世寿所许，定当遵嘱”，是什么意思？', a: ['只要我还活着，一定照您说的做', '我太忙了，以后再说吧', '请您再说一遍'], why: '这八个字，丰子恺用四十多年守住了。' },
-    en: { q: 'Feng replied “世寿所许，定当遵嘱.” What did he mean?', a: ['As long as I live, I will do as you ask', 'I’m too busy, maybe later', 'Please say that again'], why: 'Feng kept those eight characters for more than forty years.' },
-  },
-  {
-    zh: { q: '丰子恺说：“护生者，护____也。”', a: ['心', '身', '林'], why: '爱护生命，其实是在守护我们自己的心。' },
-    en: { q: 'Feng Zikai said: “To protect life is to protect the ____.”', a: ['heart', 'body', 'forest'], why: 'Caring for living things is how we look after our own hearts.' },
-  },
-  {
-    zh: { q: '在《母之羽》里，小鸡们为什么围着那团羽毛？', a: ['它们以为那是妈妈', '它们在玩游戏', '羽毛里有米粒'], why: '那是母鸡妈妈的羽毛，小鸡们不知道妈妈已经不在了。' },
-    en: { q: 'In “Mother’s Feathers,” why do the chicks gather around the feathers?', a: ['They think it’s their mother', 'They’re playing a game', 'There’s rice in them'], why: 'They are the mother hen’s feathers. The chicks don’t know she is gone.' },
-  },
-  {
-    zh: { q: '白居易的诗：“劝君莫打枝头鸟，______。”', a: ['子在巢中望母归', '春风吹又生', '疑是地上霜'], why: '鸟妈妈的孩子，正在窝里等她回家。' },
-    en: { q: 'Bai Juyi wrote: “Do not strike the bird on the branch: ______”', a: ['its young in the nest are waiting for their mother', 'the spring wind brings the grass back', 'I thought it was frost on the ground'], why: 'The mother bird’s chicks are in the nest, waiting for her to come home.' },
-  },
-  {
-    zh: { q: '苏轼的诗：“为鼠常留饭，______。”', a: ['怜蛾不点灯', '低头思故乡', '处处闻啼鸟'], why: '可怜飞蛾扑火，苏轼夜里就不点灯。' },
-    en: { q: 'Su Shi wrote: “Always leave some rice out for the mice; ______”', a: ['out of pity for the moths, leave the lamp unlit', 'I bow my head and think of home', 'everywhere I hear the birds singing'], why: 'So the moths would not fly into the flame, Su Shi left his lamp unlit.' },
-  },
-  {
-    zh: { q: '飞蛾为什么会绕着灯飞？', a: ['灯光让它们分不清上下', '它们喜欢暖和', '灯上有好吃的'], why: '飞虫把背朝向最亮的地方来分清上下，灯光让它们迷了路。' },
-    en: { q: 'Why do moths circle lamps?', a: ['The light confuses their sense of up and down', 'They like the warmth', 'There’s food on the lamp'], why: 'Flying insects turn their backs toward the brightest light to tell which way is up, so a lamp leads them astray.' },
-  },
-  {
-    zh: { q: '下面哪种做法最能守护鱼儿？', a: ['让河水保持干净', '买外地的鱼放进河里', '把鱼捉回家养'], why: '守护它们本来的家，才是最好的护生。' },
-    en: { q: 'Which of these does the most to protect fish?', a: ['Keeping rivers clean', 'Releasing fish bought from somewhere else', 'Taking fish home as pets'], why: 'Protecting the place they live is the best way to protect them.' },
-  },
-  {
-    zh: { q: '丰子恺画的人物，常常有什么特点？', a: ['脸上没有五官', '都戴着帽子', '都在哈哈大笑'], why: '没有五官，看画的人反而能从动作里读出心情。' },
-    en: { q: 'What is special about the people in Feng Zikai’s paintings?', a: ['Their faces often have no features', 'They all wear hats', 'They are all laughing'], why: 'Without faces, we read their feelings from how they stand and move.' },
-  },
-  {
-    zh: { q: '李叔同写的哪首歌，至今还在传唱？', a: ['《送别》', '《茉莉花》', '《让我们荡起双桨》'], why: '“长亭外，古道边，芳草碧连天……”就是《送别》。' },
-    en: { q: 'Which song by Li Shutong is still sung today?', a: ['“Farewell” (Songbie)', '“Jasmine Flower”', '“Let Us Row the Oars”'], why: '“Beyond the long pavilion, beside the ancient road…” is from “Farewell.”' },
-  },
-  {
-    zh: { q: '地上有一只羽毛差不多长齐、会蹦会跳的小鸟，最好怎么做？', a: ['远远看着，别打扰它', '马上带回家', '把它放进鸟笼'], why: '它多半正在学飞，爸爸妈妈就在附近。' },
-    en: { q: 'You find a young bird on the ground with most of its feathers, hopping about. What is best?', a: ['Watch from a distance and leave it alone', 'Take it home right away', 'Put it in a cage'], why: 'It is probably learning to fly, and its parents are close by.' },
-  },
-  {
-    zh: { q: '在《生的扶持》里，两只螃蟹在做什么？', a: ['扶起跌倒的同伴', '打架', '抢食物'], why: '“一蟹失足，二蟹持扶。物知慈悲，人何不如。”' },
-    en: { q: 'In “Helping Each Other Live,” what are the two crabs doing?', a: ['Helping a friend who fell', 'Fighting', 'Stealing food'], why: '“One crab loses its footing; two crabs hold it up.”' },
-  },
-  {
-    zh: { q: '为什么不能随便把山里的画眉捉回家养？', a: ['它是受保护的野生动物', '画眉不会唱歌', '画眉太大了'], why: '画眉已被列为国家二级保护野生动物，它属于山林。' },
-    en: { q: 'Why shouldn’t you catch a wild hwamei thrush to keep at home?', a: ['It is a protected wild species', 'Hwameis can’t sing', 'Hwameis are too big'], why: 'The hwamei is a protected species in China. It belongs in the woods.' },
-  },
+  { q: '《护生画集》一共有几集？', a: ['六集', '三集', '十集'], why: '从1929年到1973年，丰子恺一共画了六集。' },
+  { q: '六集加起来，一共有多少幅画？', a: ['450幅', '100幅', '1000幅'], why: '50＋60＋70＋80＋90＋100＝450。' },
+  { q: '丰子恺和谁约定画《护生画集》？', a: ['他的老师弘一法师（李叔同）', '他的学生', '他的邻居'], why: '李叔同是丰子恺的美术和音乐老师，后来出家成了弘一法师。' },
+  { q: '第一集为什么正好是五十幅？', a: ['为老师五十岁生日祝寿', '纸只够画五十张', '一年有五十个星期'], why: '1929年老师五十岁，丰子恺用五十幅画为他祝寿。' },
+  { q: '丰子恺回信说“世寿所许，定当遵嘱”，是什么意思？', a: ['只要我还活着，一定照您说的做', '我太忙了，以后再说吧', '请您再说一遍'], why: '这八个字，丰子恺用四十多年守住了。' },
+  { q: '丰子恺说：“护生者，护____也。”', a: ['心', '身', '林'], why: '爱护生命，其实是在守护我们自己的心。' },
+  { q: '在《母之羽》里，小鸡们为什么围着那团羽毛？', a: ['它们以为那是妈妈', '它们在玩游戏', '羽毛里有米粒'], why: '那是母鸡妈妈的羽毛，小鸡们不知道妈妈已经不在了。' },
+  { q: '白居易的诗：“劝君莫打枝头鸟，______。”', a: ['子在巢中望母归', '春风吹又生', '疑是地上霜'], why: '鸟妈妈的孩子，正在窝里等她回家。' },
+  { q: '苏轼的诗：“为鼠常留饭，______。”', a: ['怜蛾不点灯', '低头思故乡', '处处闻啼鸟'], why: '可怜飞蛾扑火，苏轼夜里就不点灯。' },
+  { q: '飞蛾为什么会绕着灯飞？', a: ['灯光让它们分不清上下', '它们喜欢暖和', '灯上有好吃的'], why: '飞虫把背朝向最亮的地方来分清上下，灯光让它们迷了路。' },
+  { q: '下面哪种做法最能守护鱼儿？', a: ['让河水保持干净', '买外地的鱼放进河里', '把鱼捉回家养'], why: '守护它们本来的家，才是最好的护生。' },
+  { q: '丰子恺画的人物，常常有什么特点？', a: ['脸上没有五官', '都戴着帽子', '都在哈哈大笑'], why: '没有五官，看画的人反而能从动作里读出心情。' },
+  { q: '李叔同写的哪首歌，至今还在传唱？', a: ['《送别》', '《茉莉花》', '《让我们荡起双桨》'], why: '“长亭外，古道边，芳草碧连天……”就是《送别》。' },
+  { q: '地上有一只羽毛差不多长齐、会蹦会跳的小鸟，最好怎么做？', a: ['远远看着，别打扰它', '马上带回家', '把它放进鸟笼'], why: '它多半正在学飞，爸爸妈妈就在附近。' },
+  { q: '在《生的扶持》里，两只螃蟹在做什么？', a: ['扶起跌倒的同伴', '打架', '抢食物'], why: '“一蟹失足，二蟹持扶。物知慈悲，人何不如。”' },
+  { q: '为什么不能随便把山里的画眉捉回家养？', a: ['它是受保护的野生动物', '画眉不会唱歌', '画眉太大了'], why: '画眉已被列为国家二级保护野生动物，它属于山林。' },
 ];
 
 </script>
 <script>
 /* 护生之约 · paintings.js
- * Feng Zikai's original paintings used in the game.
+ * 游戏里用到的丰子恺原画。
  *
- * Put a scan of each painting at the path in `file` (JPEG or PNG, about
- * 1000px wide is plenty). When a file is present the game shows the original;
- * when it is missing the game shows a redrawn sketch and says so.
+ * 把每幅画的扫描图放到 `file` 写的位置（JPEG 或 PNG，宽约 1000 像素即可）。
+ * 找到文件时游戏展示原画；找不到时显示重绘的示意图，并标明“示意图”。
  *
- * Copyright: Feng Zikai died in 1975, so his work entered the public domain in
- * mainland China on 1 January 2026. Volume 1 of 护生画集 (1929) and the
- * 1920s Zikai Manhua drawings are also public domain in the United States. */
+ * 版权：丰子恺于1975年去世，他的作品已于2026年1月1日在中国大陆进入公有领域；
+ * 《护生画集》第一集（1929）和1920年代的子恺漫画在美国也已进入公有领域。 */
 window.PAINTINGS = {
   qiutu: {
     file: 'images/paintings/qiutu-zhi-ge.jpg',
     title: '囚徒之歌',
-    titleEn: 'Song of the Prisoners',
     source: '《护生画集》第一集 · 1929',
-    sourceEn: 'Paintings for the Preservation of Life, Volume 1 · 1929',
     poem: '人在牢狱，终日愁欷；鸟在樊笼，终日悲啼。聆此哀音，凄入心脾；何如放舍，任彼高飞。',
     poemBy: '弘一法师题',
-    poemEn: 'A person in prison grieves all day long; a bird in a cage cries all day long. Hearing such mournful sounds, sorrow pierces the heart. Why not let it go, and let it fly high?',
-    poemByEn: 'Inscription by Master Hongyi',
     note: '弘一法师后来把这幅画改名为《凄音》，免得和另一幅《平和之歌》重复。',
-    noteEn: 'Master Hongyi later renamed this painting “Mournful Sounds” (凄音), so it would not repeat the title of another painting, “Song of Peace.”',
   },
   muzhiyu: {
     file: 'images/paintings/mu-zhi-yu.jpg',
     title: '母之羽',
-    titleEn: 'Mother’s Feathers',
     source: '《护生画集》第一集 · 1929',
-    sourceEn: 'Paintings for the Preservation of Life, Volume 1 · 1929',
     poem: '雏儿依残羽，殷殷恋慈母。母亡儿不知，犹复相环守。',
     poemBy: '题诗（节选）',
-    poemEn: 'The chicks cling to the fallen feathers, longing for their loving mother. She has died, and they do not know; still they gather round and keep watch.',
-    poemByEn: 'From the inscription',
     note: '据画集里的说明，这幅画取意于一个古老的故事：有人把一只蝙蝠碾成了药末，几只还没睁眼的小蝙蝠循着妈妈的气味，围聚在药末旁边。丰子恺把它画成了小鸡和母鸡的羽毛。',
-    noteEn: 'According to a note in the collection, the painting adapts an old story: someone ground a bat into medicine powder, and its baby bats, eyes not yet open, gathered round the powder because they knew their mother’s scent. Feng retold it with chicks and a hen’s feathers.',
   },
   fuchi: {
     file: 'images/paintings/sheng-de-fuchi.jpg',
     title: '生的扶持',
-    titleEn: 'Helping Each Other Live',
     source: '《护生画集》第一集 · 1929',
-    sourceEn: 'Paintings for the Preservation of Life, Volume 1 · 1929',
     poem: '一蟹失足，二蟹持扶。物知慈悲，人何不如。',
     poemBy: '弘一法师题',
-    poemEn: 'One crab loses its footing; two crabs hold it up. If creatures know compassion, how can people do less?',
-    poemByEn: 'Inscription by Master Hongyi',
   },
   abao: {
     file: 'images/paintings/abao.jpg',
     title: '阿宝两只脚，凳子四只脚',
-    titleEn: 'Abao Has Two Feet, the Stool Has Four',
     source: '子恺漫画 · 1920年代',
-    sourceEn: 'Zikai Manhua · 1920s',
   },
 };
 
@@ -2280,13 +1796,7 @@ window.PAINTINGS = {
   HS.NS = NS;
 
   /* ---------- state (kept in this browser only) ---------- */
-  function detectLang() {
-    try {
-      const l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
-      return /^zh/i.test(l) ? 'zh' : 'en';
-    } catch (e) { return 'zh'; }
-  }
-  const fresh = () => ({ lang: detectLang(), name: '', sound: true, easy: false, pages: {}, prologue: false, quiz: { best: 0, passed: false } });
+  const fresh = () => ({ name: '', sound: true, easy: false, pages: {}, prologue: false, quiz: { best: 0, passed: false } });
 
   function load() {
     let saved = null;
@@ -2294,7 +1804,6 @@ window.PAINTINGS = {
     const s = Object.assign(fresh(), saved && typeof saved === 'object' ? saved : {});
     if (!s.pages || typeof s.pages !== 'object') s.pages = {};
     if (!s.quiz || typeof s.quiz !== 'object') s.quiz = { best: 0, passed: false };
-    if (s.lang !== 'zh' && s.lang !== 'en') s.lang = detectLang();
     return s;
   }
   HS.state = load();
@@ -2302,9 +1811,7 @@ window.PAINTINGS = {
   HS.loadDraft = () => { try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (e) { return null; } };
   HS.saveDraft = (d) => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); return true; } catch (e) { return false; } };
   HS.reset = () => {
-    const lang = HS.state.lang;
     HS.state = fresh();
-    HS.state.lang = lang;
     try { localStorage.removeItem(KEY); localStorage.removeItem(DRAFT_KEY); } catch (e) { /* ignore */ }
     HS.save();
   };
@@ -2320,27 +1827,18 @@ window.PAINTINGS = {
 
   /* ---------- words ---------- */
   HS.t = function (key, vars) {
-    const d = window.STR[HS.state.lang] || window.STR.zh;
-    let v = d[key];
-    if (v === undefined) v = window.STR.zh[key];
+    let v = window.STR.zh[key];
     if (v === undefined) return key;
     if (vars && typeof v === 'string') v = v.replace(/\{(\w+)\}/g, (m, k) => (vars[k] !== undefined ? vars[k] : m));
     return v;
   };
   HS.zh = (key) => window.STR.zh[key];
-  HS.en = () => HS.state.lang === 'en';
   const ZH_NUM = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-  HS.pageNo = (n) => HS.t('ui.pageN', { n: HS.en() ? n : ZH_NUM[n] || n });
+  HS.pageNo = (n) => HS.t('ui.pageN', { n: ZH_NUM[n] || n });
 
   HS.applyLang = function () {
-    document.documentElement.lang = HS.en() ? 'en' : 'zh-CN';
-    document.title = HS.en() ? '护生之约 · A Promise to Protect Life' : '护生之约';
-  };
-  HS.setLang = function (lang) {
-    HS.state.lang = lang;
-    HS.save();
-    HS.applyLang();
-    HS.go(current || 'title', { keepHash: true });
+    document.documentElement.lang = 'zh-CN';
+    document.title = '护生之约';
   };
 
   /* ---------- DOM helpers ---------- */
@@ -2420,13 +1918,6 @@ window.PAINTINGS = {
     });
     paint();
     return b;
-  };
-
-  HS.langButton = function () {
-    return h('button', {
-      class: 'btn btn-small', type: 'button', lang: HS.en() ? 'zh-CN' : 'en',
-      onclick: () => HS.setLang(HS.en() ? 'zh' : 'en'),
-    }, HS.t('ui.lang'));
   };
 
   /* ---------- toast & modal ---------- */
@@ -2810,7 +2301,7 @@ window.PAINTINGS = {
   }
 
   function buildLeaf(def, seals, showOriginal) {
-    const t = HS.t, k = def.key, en = HS.en();
+    const t = HS.t, k = def.key;
     const orig = def.original ? HS.painting(def.original) : null;
     const sealBox = h('div', { class: 'leafpage-seals' });
     let art, inscription, verseLine;
@@ -2818,36 +2309,32 @@ window.PAINTINGS = {
       art = h('div', { class: 'leafpage-art is-original' }, HS.original(def.original), sealBox);
       inscription = inscriptionBlock(orig.title, orig.poem, orig.poemBy);
       verseLine = h('div', { class: 'leafpage-orig-note' },
-        h('p', { class: 'eyebrow', style: 'color:var(--seal)' }, t('orig.unlocked')),
-        en && orig.poemEn ? h('p', { class: 'leafpage-verse-en' }, `“${orig.poemEn}” — ${orig.poemByEn}`) : null);
+        h('p', { class: 'eyebrow', style: 'color:var(--seal)' }, t('orig.unlocked')));
     } else {
       art = h('div', { class: 'leafpage-art', html: Art.svg(def.painting(), 1000, 625, { label: t(k + '.title') }) }, sealBox);
       inscription = inscriptionBlock(HS.zh(k + '.title'), HS.zh(k + '.verse'), '—— ' + HS.zh(k + '.verseBy'));
-      verseLine = en
-        ? h('p', { class: 'leafpage-verse-en' }, `“${t(k + '.verseEn')}” — ${t(k + '.verseBy')}`)
-        : h('p', { class: 'muted' }, t(k + '.verseGloss'));
+      verseLine = h('p', { class: 'muted' }, t(k + '.verseGloss'));
     }
     const top = h('div', { class: 'leafpage-top' }, art, inscription);
     const cards = [];
     if (orig) {
       cards.push(h('div', { class: 'info info-orig' },
         h('h3', {}, `${t('orig.heading')}《${orig.title}》`),
-        h('p', { class: 'reveal-sub' }, en ? `${orig.titleEn} · ${orig.sourceEn}` : orig.source),
+        h('p', { class: 'reveal-sub' }, orig.source),
         showOriginal ? null : h('p', { class: 'poem-zh', lang: 'zh-CN', style: 'font-size:1.15rem' }, orig.poem),
-        showOriginal || !en ? null : h('p', { class: 'poem-en' }, orig.poemEn),
-        orig.note ? h('p', {}, en ? orig.noteEn : orig.note) : null));
+        orig.note ? h('p', {}, orig.note) : null));
     }
     cards.push(h('div', { class: 'info' }, h('h3', {}, t('ui.know')), h('p', {}, t(k + '.know'))));
     cards.push(h('div', { class: 'info' }, h('h3', {}, t(def.bookLabel || 'ui.fromBook')), h('p', {}, t(k + '.book'))));
     if (orig && showOriginal) {
       cards.push(h('div', { class: 'info' }, h('h3', {}, t('leaf.verseCard')),
         h('p', { class: 'poem-zh', lang: 'zh-CN', style: 'font-size:1.15rem' }, HS.zh(k + '.verse')),
-        h('p', {}, en ? `“${t(k + '.verseEn')}” — ${t(k + '.verseBy')}` : `${t(k + '.verseGloss')}（${HS.zh(k + '.verseBy')}）`)));
+        h('p', {}, `${t(k + '.verseGloss')}（${t(k + '.verseBy')}）`)));
     }
     const info = h('div', { class: 'leafpage-info' }, cards);
     const why = t(seals >= 3 ? 'ch.sealWhy3' : seals === 2 ? 'ch.sealWhy2' : 'ch.sealWhy1');
     const foot = h('div', { class: 'leafpage-foot' },
-      h('div', { class: 'got' }, HS.sealsRow(seals), h('span', {}, t('ch.sealsGot', { n: seals }) + (en ? '. ' : '。') + why)),
+      h('div', { class: 'got' }, HS.sealsRow(seals), h('span', {}, t('ch.sealsGot', { n: seals }) + '。' + why)),
       h('div', { class: 'toolbar' },
         h('button', { class: 'btn', type: 'button', onclick: () => { HS.closeModal(); HS.go(def.id); } }, t('ch.replay')),
         h('button', { class: 'btn btn-seal', type: 'button', 'data-autofocus': '', onclick: () => { HS.closeModal(); Sound.page(); HS.go('album', { highlight: def.id }); } }, t('ui.collect'))));
@@ -2895,22 +2382,20 @@ window.PAINTINGS = {
   HS.original = function (id, opts = {}) {
     const p = HS.painting(id);
     if (!p) return h('div');
-    const en = HS.en();
     const frame = h('div', { class: 'original-frame' });
     const badge = h('span', { class: 'original-badge' });
     const caption = h('figcaption', { class: 'original-cap' },
       opts.hideTitle ? null : h('span', { class: 'original-title', lang: 'zh-CN' }, `《${p.title}》`),
-      opts.hideTitle || !en ? null : h('span', { class: 'original-title-en' }, p.titleEn),
-      h('span', { class: 'original-src' }, en ? p.sourceEn : p.source),
+      h('span', { class: 'original-src' }, p.source),
       badge);
     const fig = h('figure', { class: 'original' + (opts.compact ? ' is-compact' : '') }, h('div', { class: 'mount' }, frame), caption);
     const showSketch = () => {
-      frame.innerHTML = opts.sketch ? Art.svg(opts.sketch, 1000, 700, { label: en ? p.titleEn : p.title }) : '';
+      frame.innerHTML = opts.sketch ? Art.svg(opts.sketch, 1000, 700, { label: p.title }) : '';
       frame.classList.add('is-sketch');
       badge.textContent = HS.t('orig.sketch');
       fig.dataset.state = 'sketch';
     };
-    const img = h('img', { alt: en ? `${p.titleEn} — ${HS.t('orig.by')}` : `${p.title}，${HS.t('orig.by')}`, decoding: 'async' });
+    const img = h('img', { alt: `${p.title}，${HS.t('orig.by')}`, decoding: 'async' });
     frame.appendChild(img);
     badge.textContent = HS.t('orig.real');
     fig.dataset.state = 'loading';
@@ -2924,12 +2409,10 @@ window.PAINTINGS = {
   HS.originalText = function (id) {
     const p = HS.painting(id);
     if (!p || !p.poem) return null;
-    const en = HS.en();
     return h('div', { class: 'original-text' },
       h('p', { class: 'poem-zh', lang: 'zh-CN' }, p.poem),
-      h('p', { class: 'reveal-sub' }, en ? p.poemByEn : p.poemBy),
-      en && p.poemEn ? h('p', { class: 'poem-en' }, p.poemEn) : null,
-      p.note ? h('p', { class: 'muted', style: 'font-size:.95rem' }, en ? p.noteEn : p.note) : null);
+      h('p', { class: 'reveal-sub' }, p.poemBy),
+      p.note ? h('p', { class: 'muted', style: 'font-size:.95rem' }, p.note) : null);
   };
 
   /* ---------- canvas helpers shared by the studio and the certificate ---------- */
@@ -3079,7 +2562,6 @@ window.PAINTINGS = {
           actions,
           h('div', { class: 'toolbar' },
             h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('teacher') }, t('title.teacher')),
-            HS.langButton(),
             HS.soundButton()),
           h('p', { class: 'cover-credit' }, t('app.credit')))));
     },
@@ -3141,7 +2623,6 @@ window.PAINTINGS = {
         h('div', { class: 'toolbar' },
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('title') }, '‹ ' + t('ui.cover')),
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('teacher') }, t('title.teacher')),
-          HS.langButton(),
           HS.soundButton()));
 
       const intro = h('ul', { class: 'album-intro', style: 'margin:0;padding:0' }, h('li', { class: 'leaf leaf-intro is-done', id: 'leaf-prologue' },
@@ -3150,7 +2631,7 @@ window.PAINTINGS = {
           h('div', { class: 'leaf-meta' },
             h('span', { class: 'leaf-no' }, t('album.prologue').split(' · ')[0] + (HS.state.prologue ? ' · ' + t('album.read') : '')),
             h('span', { class: 'leaf-title' }, t('pro.title')),
-            h('span', { class: 'leaf-desc' }, HS.en() ? `${t('album.prologueDesc')}: ${t('pro.p4.gloss')}` : `${t('album.prologueDesc')}：“${HS.zh('pro.p4.quote')}”`)))));
+            h('span', { class: 'leaf-desc' }, `${t('album.prologueDesc')}：“${t('pro.p4.quote')}”`)))));
       const grid = h('ol', { class: 'album-grid' });
       for (const def of HS.chapters) {
         const p = HS.state.pages[def.id];
@@ -3357,7 +2838,7 @@ window.PAINTINGS = {
     const info = h('div', { class: 'vol-info', 'aria-live': 'polite' }, HS.t('pro.shelfHint'));
     const row = h('div', { class: 'shelf', role: 'group', 'aria-label': HS.t('pro.p6.t') });
     vols.forEach((v, i) => {
-      const b = h('button', { class: 'vol', type: 'button', 'aria-pressed': 'false', style: `--i:${i};--c:${VOL_COLORS[i]}` }, HS.en() ? v.year : v.n);
+      const b = h('button', { class: 'vol', type: 'button', 'aria-pressed': 'false', style: `--i:${i};--c:${VOL_COLORS[i]}` }, v.n);
       b.addEventListener('click', () => {
         row.querySelectorAll('.vol').forEach((x) => x.setAttribute('aria-pressed', 'false'));
         b.setAttribute('aria-pressed', 'true');
@@ -3400,7 +2881,7 @@ window.PAINTINGS = {
         if (p.key === 'p6') text.append(shelf());
         if (p.key === 'p7') {
           text.append(h('p', { class: 'big-quote', lang: 'zh-CN', style: 'font-size:clamp(1.6rem,3.6vw,2.3rem)' }, '护生者，护心也。'));
-          text.append(h('div', { class: 'card-row' }, h('div', { class: 'guide-cat', html: HS.catSVG() }), h('p', { class: 'reply' }, h('span', { class: 'who' }, t('ui.catName') + (HS.en() ? ':' : '：')), t('pro.p7.cat'))));
+          text.append(h('div', { class: 'card-row' }, h('div', { class: 'guide-cat', html: HS.catSVG() }), h('p', { class: 'reply' }, h('span', { class: 'who' }, t('ui.catName') + '：'), t('pro.p7.cat'))));
         }
         pageBox.innerHTML = '';
         pageBox.appendChild(h('div', { class: 'book-page' },
@@ -4050,7 +3531,9 @@ window.PAINTINGS = {
   const WIN = { x: 230, y: 235, r: 150 };
   const LAMP = { x: 700, y: 430, s: 0.95 };
   const FLAME = { x: 701, y: 312 };
-  const GAUZE_HOME = { x: 380, y: 585 };
+  const GAUZE_HOME = { x: 522, y: 424 };
+  const GAUZE_ON = { x: LAMP.x, y: 340 };
+  const GAUZE_S = 0.9;
 
   function room(o = {}) {
     let s = `<rect width="1000" height="625" fill="#ecebe3"/>`;
@@ -4068,7 +3551,7 @@ window.PAINTINGS = {
     // floor, desk and things on it
     s += A.line([[0, 575], [1000, 580]], 1.4, { op: 0.45 });
     s += A.desk(470, 960, 430, 150);
-    s += A.books(560, 430) + A.brushPot(890, 430) + A.paperStack(800, 430, 3);
+    s += A.books(612, 430) + A.brushPot(890, 430) + A.paperStack(800, 430, 3);
     s += `<ellipse cx="160" cy="590" rx="80" ry="16" fill="${C.indigo}" fill-opacity=".35"/>`;
     s += A.place(A.cat({ pose: 'sleep' }), { x: 160, y: 584, s: 0.9 });
     return s;
@@ -4113,13 +3596,18 @@ window.PAINTINGS = {
         HS.setPos(lamp, LAMP.x, LAMP.y, 0, LAMP.s);
         const flame = lamp.querySelector('.flame');
         const mothLayer = ctx.layer('moths');
-        const gauze = ctx.add('gauze', A.gauze(), { opacity: '0', class: 'hit' });
+        const ghost = ctx.add('ghost', `<g class="blink-soft"><path d="M-30-86L-30 0C-30 7 30 7 30 0L30-86" fill="none" stroke="${C.seal}" stroke-width="2.4" stroke-dasharray="7 6"/><ellipse cx="0" cy="-86" rx="30" ry="7" fill="none" stroke="${C.seal}" stroke-width="2.4" stroke-dasharray="7 6"/></g>`, { opacity: '0', 'pointer-events': 'none' });
+        HS.setPos(ghost, GAUZE_ON.x, GAUZE_ON.y, 0, GAUZE_S);
+        // outer group holds the position; the inner group pulses (a CSS transform on the outer one would override its position)
+        const gauze = ctx.add('gauze', `<g class="gauze-inner">${A.gauze()}</g>`, { opacity: '0', class: 'hit' });
+        const gauzeInner = gauze.querySelector('.gauze-inner');
 
         const total = ctx.easy ? 9 : 12;
         const moths = [];
         let spawned = 0, saved = 0, burned = 0, spawnClock = 1.2, elapsed = 0;
-        let gauzeState = 'hidden'; // hidden → offered → dragging → on
-        let lampOn = true, ended = false, cueClock = 0, asked = false;
+        let gauzeState = 'hidden'; // hidden → offered → dragging → flying → on
+        let lampOn = true, ended = false, cueClock = 0, asked = false, onClock = 0;
+        let gx = GAUZE_HOME.x, gy = GAUZE_HOME.y;
         const stat = () => ctx.stat(t('moth.stat', { a: saved, b: burned }));
         stat();
 
@@ -4141,11 +3629,44 @@ window.PAINTINGS = {
 
         function offerGauze() {
           gauzeState = 'offered';
+          gx = GAUZE_HOME.x; gy = GAUZE_HOME.y;
+          HS.setPos(gauze, gx, gy, 0, GAUZE_S);
           gauze.setAttribute('opacity', '1');
-          gauze.classList.add('pulse');
-          HS.setPos(gauze, GAUZE_HOME.x, GAUZE_HOME.y, 0, 0.9);
+          ghost.setAttribute('opacity', '1');
+          gauzeInner.classList.add('pulse');
           ctx.say(t('moth.gauzeCue'), 5200);
           Sound.good();
+        }
+
+        /* Is a scene point on the gauze shade, as drawn right now? */
+        function onGauze(p) {
+          const pad = 22 * ctx.reach;
+          return p.x > gx - 30 * GAUZE_S - pad && p.x < gx + 30 * GAUZE_S + pad && p.y > gy - 92 * GAUZE_S - pad && p.y < gy + 10 * GAUZE_S + pad;
+        }
+
+        function putGauzeOn() {
+          gauzeState = 'on';
+          onClock = 0;
+          gx = GAUZE_ON.x; gy = GAUZE_ON.y;
+          HS.setPos(gauze, gx, gy, 0, GAUZE_S);
+          gauzeInner.classList.remove('pulse');
+          ghost.setAttribute('opacity', '0');
+          Sound.stamp();
+          ctx.say(t('moth.gauzeOn'), 4200);
+        }
+
+        /* A tap (or Enter) glides the shade onto the lamp, for anyone who finds dragging hard. */
+        function glideGauze() {
+          gauzeState = 'flying';
+          gauzeInner.classList.remove('pulse');
+          const x0 = gx, y0 = gy;
+          let k = 0;
+          const stop = ctx.loop((dt) => {
+            k = Math.min(1, k + dt * 2.2);
+            const e = 1 - (1 - k) * (1 - k);
+            HS.setPos(gauze, HS.lerp(x0, GAUZE_ON.x, e), HS.lerp(y0, GAUZE_ON.y, e) - Math.sin(k * Math.PI) * 60, 0, GAUZE_S);
+            if (k >= 1) { stop(); putGauzeOn(); }
+          });
         }
 
         function lampOut() {
@@ -4164,61 +3685,66 @@ window.PAINTINGS = {
           });
         }
 
-        // pointer: tap moths; drag the gauze shade onto the lamp; tap the flame to blow it out at the end
+        // pointer: tap moths; drag (or tap) the gauze shade onto the lamp; tap the flame to blow it out at the end
         let drag = null;
         ctx.on(ctx.svg, 'pointerdown', (e) => {
           if (ended) return;
           e.preventDefault();
           const p = ctx.point(e);
-          if ((gauzeState === 'offered') && HS.dist(p.x, p.y, gaX(), gaY() - 38) < 70) {
+          if (gauzeState === 'offered' && onGauze(p)) {
             gauzeState = 'dragging';
-            gauze.classList.remove('pulse');
-            drag = { dx: gaX() - p.x, dy: gaY() - p.y };
+            gauzeInner.classList.remove('pulse');
+            drag = { dx: gx - p.x, dy: gy - p.y, x0: p.x, y0: p.y, moved: false };
             try { ctx.svg.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
             ctx.svg.classList.add('is-dragging');
+            Sound.tap();
             return;
           }
           const m = moths.filter((q) => q.state === 'in' || q.state === 'circle').sort((a, b) => HS.dist(a.x, a.y, p.x, p.y) - HS.dist(b.x, b.y, p.x, p.y))[0];
           if (m && HS.dist(m.x, m.y, p.x, p.y) < 44 * ctx.reach) { guide(m); return; }
-          if (asked && lampOn && HS.dist(p.x, p.y, FLAME.x, FLAME.y) < 50) lampOut();
+          if (asked && lampOn && HS.dist(p.x, p.y, FLAME.x, FLAME.y) < 60) {
+            ctx.overlay.querySelectorAll('.card').forEach((c) => c.remove());
+            lampOut();
+          }
         });
-        let gx = GAUZE_HOME.x, gy = GAUZE_HOME.y;
-        const gaX = () => gx, gaY = () => gy;
         ctx.on(ctx.svg, 'pointermove', (e) => {
           if (gauzeState !== 'dragging' || !drag) return;
           const p = ctx.point(e);
-          gx = p.x + drag.dx; gy = p.y + drag.dy;
-          HS.setPos(gauze, gx, gy, 0, 0.9);
+          if (HS.dist(p.x, p.y, drag.x0, drag.y0) > 8) drag.moved = true;
+          gx = HS.clamp(p.x + drag.dx, 40, 960);
+          gy = HS.clamp(p.y + drag.dy, 110, 600);
+          HS.setPos(gauze, gx, gy, 0, GAUZE_S);
         });
         const drop = () => {
           if (gauzeState !== 'dragging') return;
           ctx.svg.classList.remove('is-dragging');
+          const moved = drag && drag.moved;
           drag = null;
-          if (HS.dist(gx, gy - 40, FLAME.x, FLAME.y) < 95) {
-            gauzeState = 'on';
-            gx = LAMP.x; gy = 340;
-            HS.setPos(gauze, gx, gy, 0, 0.9);
-            Sound.stamp();
-            ctx.say(t('moth.gauzeOn'), 4200);
-          } else {
+          if (!moved) { glideGauze(); return; }
+          if (HS.dist(gx, gy, GAUZE_ON.x, GAUZE_ON.y) < 120) putGauzeOn();
+          else {
             gauzeState = 'offered';
-            gauze.classList.add('pulse');
+            gauzeInner.classList.add('pulse');
           }
         };
         ctx.on(ctx.svg, 'pointerup', drop);
         ctx.on(ctx.svg, 'pointercancel', drop);
+        ctx.on(window, 'keydown', (e) => {
+          if (gauzeState === 'offered' && (e.key === 'Enter' || e.key === ' ') && !/input|textarea|button/i.test(e.target.tagName)) { e.preventDefault(); glideGauze(); }
+        });
 
         const stopLoop = ctx.loop((dt, now) => {
           elapsed += dt;
           spawnClock -= dt;
           const alive = moths.filter((m) => m.state !== 'gone').length;
-          if (lampOn && spawned < total && spawnClock <= 0 && alive < 4) { spawn(); spawnClock = (ctx.easy ? 4.2 : 3.2) + Math.random(); }
+          if (lampOn && !asked && spawned < total && spawnClock <= 0 && alive < 4) { spawn(); spawnClock = (ctx.easy ? 4.2 : 3.2) + Math.random(); }
           if (gauzeState === 'hidden' && (saved + burned >= 6 || elapsed > 28)) offerGauze();
           if (gauzeState === 'offered') {
             cueClock += dt;
             if (cueClock > 9) { cueClock = 0; ctx.say(t('moth.gauzeCue'), 4000); }
           }
-          if (gauzeState === 'on' && !asked && spawned >= total && lampOn) {
+          if (gauzeState === 'on') onClock += dt;
+          if (gauzeState === 'on' && !asked && lampOn && onClock > 3.5) {
             asked = true;
             ctx.card({ body: [t('moth.moonAsk')], button: t('moth.blow') }).then(() => { if (lampOn) lampOut(); });
           }
@@ -4376,7 +3902,7 @@ window.PAINTINGS = {
     skipHowto: true,
     play(ctx) {
       return new Promise((resolve) => {
-        const t = ctx.t, en = HS.en();
+        const t = ctx.t;
         ctx.add('bg', ground() + tree());
         ctx.add('nest', A.place(A.nest(), { x: NEST.x, y: NEST.y + 8, s: 1.3 }));
         const chicks = ctx.add('chicks', nestChicks(true));
@@ -4393,7 +3919,7 @@ window.PAINTINGS = {
         let cheepClock = 0;
         const stopCheep = ctx.loop((dt) => { cheepClock += dt; if (cheepClock > 3.5) { cheepClock = 0; Sound.chirp(3, 3200); } });
 
-        const who = en ? 'Boy' : '男孩';
+        const who = '男孩';
         ctx.dialogue({
           speaker: who, line: t('nest.boy1'), prompt: t('nest.ask'), replier: who,
           options: HS.shuffle([
@@ -4411,7 +3937,7 @@ window.PAINTINGS = {
           await ctx.card({
             eyebrow: t('nest.poemBy'),
             title: HS.zh('nest.verse'),
-            body: [note(t('nest.good')), zhPoem(HS.zh('nest.poem')), en ? t('nest.poemEn') : t('nest.poemGloss')],
+            body: [note(t('nest.good')), zhPoem(t('nest.poem')), t('nest.poemGloss')],
             button: t('ui.continue'),
           });
           stopBob(); stopCheep();
@@ -4487,7 +4013,7 @@ window.PAINTINGS = {
           return new Promise((res) => {
             const c = ctx.chick;
             const hands = HS.sprite(fx, `<path d="M-22 6C-24 18-8 26 0 24 8 26 24 18 22 6C12 12-12 12-22 6Z" fill="${C.paper}" stroke="${C.ink}" stroke-width="1.4"/>`, { opacity: '0' });
-            const meter = ctx.add('meter', `<g transform="translate(40 40)"><text x="0" y="-8" font-size="20" fill="${C.ink2}" font-family="'Ma Shan Zheng','Caveat Brush','KaiTi',serif">${t('nest.fearLabel')}</text><rect x="0" y="0" width="160" height="12" fill="${C.paper}" stroke="${C.ink}" stroke-width="1.2"/><rect class="fear" x="1" y="1" width="0" height="10" fill="${C.seal}"/></g>`);
+            const meter = ctx.add('meter', `<g transform="translate(40 40)"><text x="0" y="-8" font-size="20" fill="${C.ink2}" font-family="'Ma Shan Zheng','KaiTi',serif">${t('nest.fearLabel')}</text><rect x="0" y="0" width="160" height="12" fill="${C.paper}" stroke="${C.ink}" stroke-width="1.2"/><rect class="fear" x="1" y="1" width="0" height="10" fill="${C.seal}"/></g>`);
             const fearBar = meter.querySelector('.fear');
             let held = false, target = null, fear = 0, panic = 0, panics = 0, bumps = 0, bumpCool = 0, lastX = c.x, lastY = c.y, done = false;
             const limit = ctx.easy ? 330 : 240;
@@ -4876,7 +4402,7 @@ window.PAINTINGS = {
     id: 'reading', key: 'read', no: 6, fullscreen: false,
     painting,
     enter(root) {
-      const t = HS.t, en = HS.en();
+      const t = HS.t;
       const { bar, stat } = HS.hud(def);
       const main = h('div', { class: 'reading' });
       root.appendChild(h('section', {}, bar, main));
@@ -4931,10 +4457,10 @@ window.PAINTINGS = {
           const block = h('div', { class: 'reveal-block' },
             h('p', { class: 'eyebrow', style: 'color:var(--ok)' }, t('read.right')),
             h('p', { class: 'reveal-title', lang: 'zh-CN' }, `《${p.title}》`),
-            en ? h('p', { class: 'reveal-sub' }, `${p.titleEn} · ${p.sourceEn}`) : h('p', { class: 'reveal-sub' }, p.source),
+            h('p', { class: 'reveal-sub' }, p.source),
             h('p', {}, t(r.key + '.text')),
             p.poem ? HS.originalText(r.id) : null,
-            r.id === 'abao' ? h('p', { class: 'quote' }, en ? `“${t('read.r1.quoteEn')}” — ${t('read.r1.quoteBy')}` : `“${t('read.r1.quote')}” ——${t('read.r1.quoteBy')}`) : null,
+            r.id === 'abao' ? h('p', { class: 'quote' }, `“${t('read.r1.quote')}” ——${t('read.r1.quoteBy')}`) : null,
             h('div', { class: 'card-actions', style: 'justify-content:flex-start' },
               h('button', { class: 'btn btn-seal', type: 'button', onclick: () => { Sound.page(); if (i + 1 < RIDDLES.length) riddle(i + 1); else finish(); } }, i + 1 < RIDDLES.length ? t('read.nextPic') + ' ›' : t('ui.continue'))));
           reveal.appendChild(block);
@@ -5018,7 +4544,7 @@ window.PAINTINGS = {
 
   HS.screens.studio = {
     enter(root) {
-      const t = HS.t, en = HS.en();
+      const t = HS.t;
       const draft = HS.loadDraft() || {};
       const canvas = h('canvas', { width: W, height: H, 'aria-label': t('studio.drawHint'), role: 'img' });
       const live = h('canvas', { width: W, height: H, style: 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none' });
@@ -5251,7 +4777,7 @@ window.PAINTINGS = {
 
       async function mountAndShow() {
         Sound.page();
-        await HS.fontsReady([['64px "Ma Shan Zheng"', '护生画题诗'], ['40px "Caveat Brush"', 'Aa'], ['24px "Noto Serif SC"', '画']]);
+        await HS.fontsReady([['64px "Ma Shan Zheng"', '护生画题诗'], ['24px "Noto Serif SC"', '画']]);
         const out = document.createElement('canvas');
         out.width = 1600; out.height = 1000;
         const o = out.getContext('2d');
@@ -5282,17 +4808,17 @@ window.PAINTINGS = {
           HS.verticalText(o, cols.slice(0, 4), 1396, 120, 44, 1.32, 1.1);
         } else {
           o.textAlign = 'left'; o.textBaseline = 'alphabetic';
-          o.font = `58px "Caveat Brush", ${brush}`;
+          o.font = `58px ${brush}`;
           let y = wrapText(o, title, 1200, 170, 330, 62);
-          o.font = `italic 30px "Andika", "Trebuchet MS", sans-serif`;
+          o.font = `30px "Noto Serif SC", "Songti SC", serif`;
           o.fillStyle = '#3b3632';
           y += 30;
           for (const l of poemLines) y = wrapText(o, l, 1200, y, 330, 40) + 10;
           sealX = 1200; sealY = HS.clamp(y + 20, 620, 830);
         }
         o.textAlign = 'left'; o.textBaseline = 'alphabetic';
-        o.font = `24px "Noto Serif SC", "Andika", serif`; o.fillStyle = '#5a524a';
-        o.fillText([name ? (HS.en() ? `Painted by ${name}` : `${name} 画`) : '', dateText, '护生之约'].filter(Boolean).join(' · '), 80, 880);
+        o.font = `24px "Noto Serif SC", "Songti SC", serif`; o.fillStyle = '#5a524a';
+        o.fillText([name ? `${name} 画` : '', dateText, '护生之约'].filter(Boolean).join(' · '), 80, 880);
         HS.drawSeal(o, sealText, sealX, sealY, 100);
         HS.showPicture(out, `${title}.png`, { title: t('studio.preview'), alt: title, closeLabel: t('studio.edit') });
       }
@@ -5324,8 +4850,8 @@ window.PAINTINGS = {
   const N = 8, PASS = 6;
 
   async function certificate() {
-    const t = HS.t, en = HS.en();
-    await HS.fontsReady([['80px "Ma Shan Zheng"', '护生小画师证书丰子恺'], ['60px "Caveat Brush"', 'Little Painter'], ['30px "Noto Serif SC"', '同学走进了画册'], ['30px "Andika"', 'Aa']]);
+    const t = HS.t;
+    await HS.fontsReady([['80px "Ma Shan Zheng"', '护生小画师证书丰子恺'], ['30px "Noto Serif SC"', '同学走进了画册']]);
     const W = 1600, H = 1130;
     const cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
@@ -5340,31 +4866,23 @@ window.PAINTINGS = {
     if (img) g.drawImage(img, 100, 380, 400 * 0.95, 660 * 0.95);
     const brush = '"Ma Shan Zheng","STKaiti","KaiTi",serif';
     g.fillStyle = '#26221e'; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
-    if (en) {
-      g.font = `96px "Caveat Brush", ${brush}`;
-      g.fillText(t('cert.title'), W / 2, 250);
-      g.font = `40px "Andika", sans-serif`; g.fillStyle = '#8c271f';
-      g.fillText(t('cert.word').toUpperCase(), W / 2, 310);
-    } else {
-      g.font = `118px ${brush}`;
-      g.fillText(t('cert.title'), W / 2, 262);
-      g.font = `46px ${brush}`; g.fillStyle = '#8c271f';
-      g.fillText(t('cert.word'), W / 2, 330);
-    }
+    g.font = `118px ${brush}`;
+    g.fillText(t('cert.title'), W / 2, 262);
+    g.font = `46px ${brush}`; g.fillStyle = '#8c271f';
+    g.fillText(t('cert.word'), W / 2, 330);
     const P = HS.progress();
     const name = (HS.state.name || '').trim() || t('cert.anon');
     const body = t('cert.body', { name, pages: P.done, seals: P.seals });
     g.fillStyle = '#26221e';
-    g.font = en ? '36px "Andika", "Trebuchet MS", sans-serif' : '38px "Noto Serif SC", "Songti SC", serif';
+    g.font = '38px "Noto Serif SC", "Songti SC", serif';
     g.textAlign = 'left';
-    wrap(g, body, 520, 440, 900, en ? 56 : 64, !en);
+    wrap(g, body, 520, 440, 900, 64, true);
     g.textAlign = 'center';
     g.font = `52px ${brush}`; g.fillStyle = '#8c271f';
-    g.fillText(HS.zh('cert.quote') + '　——' + HS.zh('cert.quoteBy'), W / 2 + 160, 800);
-    if (en) { g.font = 'italic 30px "Andika", sans-serif'; g.fillStyle = '#5a524a'; g.fillText(`“${t('cert.quoteEn')}” — ${t('cert.quoteBy')}`, W / 2 + 160, 850); }
+    g.fillText(t('cert.quote') + '　——' + t('cert.quoteBy'), W / 2 + 160, 800);
     const d = new Date();
-    g.font = '28px "Noto Serif SC", "Andika", serif'; g.fillStyle = '#5a524a'; g.textAlign = 'right';
-    g.fillText(`${t('cert.issuer')} · ${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()}`, W - 290, H - 150);
+    g.font = '28px "Noto Serif SC", "Songti SC", serif'; g.fillStyle = '#5a524a'; g.textAlign = 'right';
+    g.fillText(`${t('cert.issuer')} · ${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`, W - 290, H - 150);
     HS.drawSeal(g, HS.playerSealText(), W - 260, H - 250, 120);
     return cv;
   }
@@ -5384,7 +4902,7 @@ window.PAINTINGS = {
 
   HS.screens.quiz = {
     enter(root) {
-      const t = HS.t, en = HS.en();
+      const t = HS.t;
       const { bar, stat } = HS.hud({ no: 8, key: 'quiz' });
       bar.querySelector('.hud-no').textContent = '';
       const main = h('div', { class: 'quiz' });
@@ -5409,7 +4927,7 @@ window.PAINTINGS = {
       }
 
       function run() {
-        const qs = HS.shuffle(window.QUIZ).slice(0, N).map((q) => q[en ? 'en' : 'zh']);
+        const qs = HS.shuffle(window.QUIZ).slice(0, N);
         let i = 0, score = 0;
         function ask() {
           const q = qs[i];
@@ -5478,14 +4996,14 @@ window.PAINTINGS = {
       const list = (items, ordered) => h(ordered ? 'ol' : 'ul', {}, items.map((x) => h('li', {}, x)));
 
       const asks = h('ul', { class: 'asks' },
-        HS.chapters.map((c) => h('li', {}, h('b', {}, `${HS.pageNo(c.no)} · ${t(c.key + '.title')}：`.replace('：', HS.en() ? ': ' : '：')), t(c.askKey || c.key + '.ask'))));
+        HS.chapters.map((c) => h('li', {}, h('b', {}, `${HS.pageNo(c.no)} · ${t(c.key + '.title')}：`), t(c.askKey || c.key + '.ask'))));
 
       // original paintings: which scans are present
       const origList = h('ul', {});
       Object.keys(window.PAINTINGS || {}).forEach((id) => {
         const p = HS.painting(id);
         const status = h('span', { class: 'muted' }, t('teach.checking'));
-        origList.appendChild(h('li', {}, h('span', { class: 'brush', lang: 'zh-CN' }, `《${p.title}》`), ' ', HS.en() ? `${p.titleEn} · ` : '', h('code', {}, p.file), ' — ', status));
+        origList.appendChild(h('li', {}, h('span', { class: 'brush' }, `《${p.title}》`), ' ', h('code', {}, p.file), ' — ', status));
         HS.hasOriginal(id).then((ok) => {
           status.textContent = ok ? t('teach.found') : t('teach.missing');
           status.style.color = ok ? 'var(--ok)' : 'var(--seal-deep)';
@@ -5509,8 +5027,7 @@ window.PAINTINGS = {
       root.appendChild(h('article', { class: 'doc' },
         h('div', { class: 'toolbar' },
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('album') }, '‹ ' + t('ui.album')),
-          h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('title') }, t('ui.cover')),
-          HS.langButton()),
+          h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('title') }, t('ui.cover'))),
         h('h1', {}, t('teach.title')),
         h('section', {}, h('h2', {}, t('teach.who.t')), h('p', {}, t('teach.who'))),
         h('section', {}, h('h2', {}, t('teach.goals.t')), list(t('teach.goals'), true)),

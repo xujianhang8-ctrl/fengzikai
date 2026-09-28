@@ -66,7 +66,7 @@
     id: 'reading', key: 'read', no: 6, fullscreen: false,
     painting,
     enter(root) {
-      const t = HS.t, en = HS.en();
+      const t = HS.t;
       const { bar, stat } = HS.hud(def);
       const main = h('div', { class: 'reading' });
       root.appendChild(h('section', {}, bar, main));
@@ -121,10 +121,10 @@
           const block = h('div', { class: 'reveal-block' },
             h('p', { class: 'eyebrow', style: 'color:var(--ok)' }, t('read.right')),
             h('p', { class: 'reveal-title', lang: 'zh-CN' }, `《${p.title}》`),
-            en ? h('p', { class: 'reveal-sub' }, `${p.titleEn} · ${p.sourceEn}`) : h('p', { class: 'reveal-sub' }, p.source),
+            h('p', { class: 'reveal-sub' }, p.source),
             h('p', {}, t(r.key + '.text')),
             p.poem ? HS.originalText(r.id) : null,
-            r.id === 'abao' ? h('p', { class: 'quote' }, en ? `“${t('read.r1.quoteEn')}” — ${t('read.r1.quoteBy')}` : `“${t('read.r1.quote')}” ——${t('read.r1.quoteBy')}`) : null,
+            r.id === 'abao' ? h('p', { class: 'quote' }, `“${t('read.r1.quote')}” ——${t('read.r1.quoteBy')}`) : null,
             h('div', { class: 'card-actions', style: 'justify-content:flex-start' },
               h('button', { class: 'btn btn-seal', type: 'button', onclick: () => { Sound.page(); if (i + 1 < RIDDLES.length) riddle(i + 1); else finish(); } }, i + 1 < RIDDLES.length ? t('read.nextPic') + ' ›' : t('ui.continue'))));
           reveal.appendChild(block);

@@ -165,7 +165,7 @@
     const info = h('div', { class: 'vol-info', 'aria-live': 'polite' }, HS.t('pro.shelfHint'));
     const row = h('div', { class: 'shelf', role: 'group', 'aria-label': HS.t('pro.p6.t') });
     vols.forEach((v, i) => {
-      const b = h('button', { class: 'vol', type: 'button', 'aria-pressed': 'false', style: `--i:${i};--c:${VOL_COLORS[i]}` }, HS.en() ? v.year : v.n);
+      const b = h('button', { class: 'vol', type: 'button', 'aria-pressed': 'false', style: `--i:${i};--c:${VOL_COLORS[i]}` }, v.n);
       b.addEventListener('click', () => {
         row.querySelectorAll('.vol').forEach((x) => x.setAttribute('aria-pressed', 'false'));
         b.setAttribute('aria-pressed', 'true');
@@ -208,7 +208,7 @@
         if (p.key === 'p6') text.append(shelf());
         if (p.key === 'p7') {
           text.append(h('p', { class: 'big-quote', lang: 'zh-CN', style: 'font-size:clamp(1.6rem,3.6vw,2.3rem)' }, '护生者，护心也。'));
-          text.append(h('div', { class: 'card-row' }, h('div', { class: 'guide-cat', html: HS.catSVG() }), h('p', { class: 'reply' }, h('span', { class: 'who' }, t('ui.catName') + (HS.en() ? ':' : '：')), t('pro.p7.cat'))));
+          text.append(h('div', { class: 'card-row' }, h('div', { class: 'guide-cat', html: HS.catSVG() }), h('p', { class: 'reply' }, h('span', { class: 'who' }, t('ui.catName') + '：'), t('pro.p7.cat'))));
         }
         pageBox.innerHTML = '';
         pageBox.appendChild(h('div', { class: 'book-page' },

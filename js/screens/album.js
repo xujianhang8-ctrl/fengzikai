@@ -51,7 +51,6 @@
         h('div', { class: 'toolbar' },
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('title') }, '‹ ' + t('ui.cover')),
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('teacher') }, t('title.teacher')),
-          HS.langButton(),
           HS.soundButton()));
 
       const intro = h('ul', { class: 'album-intro', style: 'margin:0;padding:0' }, h('li', { class: 'leaf leaf-intro is-done', id: 'leaf-prologue' },
@@ -60,7 +59,7 @@
           h('div', { class: 'leaf-meta' },
             h('span', { class: 'leaf-no' }, t('album.prologue').split(' · ')[0] + (HS.state.prologue ? ' · ' + t('album.read') : '')),
             h('span', { class: 'leaf-title' }, t('pro.title')),
-            h('span', { class: 'leaf-desc' }, HS.en() ? `${t('album.prologueDesc')}: ${t('pro.p4.gloss')}` : `${t('album.prologueDesc')}：“${HS.zh('pro.p4.quote')}”`)))));
+            h('span', { class: 'leaf-desc' }, `${t('album.prologueDesc')}：“${t('pro.p4.quote')}”`)))));
       const grid = h('ol', { class: 'album-grid' });
       for (const def of HS.chapters) {
         const p = HS.state.pages[def.id];

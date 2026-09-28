@@ -44,7 +44,7 @@
 
   HS.screens.studio = {
     enter(root) {
-      const t = HS.t, en = HS.en();
+      const t = HS.t;
       const draft = HS.loadDraft() || {};
       const canvas = h('canvas', { width: W, height: H, 'aria-label': t('studio.drawHint'), role: 'img' });
       const live = h('canvas', { width: W, height: H, style: 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none' });
@@ -277,7 +277,7 @@
 
       async function mountAndShow() {
         Sound.page();
-        await HS.fontsReady([['64px "Ma Shan Zheng"', '护生画题诗'], ['40px "Caveat Brush"', 'Aa'], ['24px "Noto Serif SC"', '画']]);
+        await HS.fontsReady([['64px "Ma Shan Zheng"', '护生画题诗'], ['24px "Noto Serif SC"', '画']]);
         const out = document.createElement('canvas');
         out.width = 1600; out.height = 1000;
         const o = out.getContext('2d');
@@ -308,17 +308,17 @@
           HS.verticalText(o, cols.slice(0, 4), 1396, 120, 44, 1.32, 1.1);
         } else {
           o.textAlign = 'left'; o.textBaseline = 'alphabetic';
-          o.font = `58px "Caveat Brush", ${brush}`;
+          o.font = `58px ${brush}`;
           let y = wrapText(o, title, 1200, 170, 330, 62);
-          o.font = `italic 30px "Andika", "Trebuchet MS", sans-serif`;
+          o.font = `30px "Noto Serif SC", "Songti SC", serif`;
           o.fillStyle = '#3b3632';
           y += 30;
           for (const l of poemLines) y = wrapText(o, l, 1200, y, 330, 40) + 10;
           sealX = 1200; sealY = HS.clamp(y + 20, 620, 830);
         }
         o.textAlign = 'left'; o.textBaseline = 'alphabetic';
-        o.font = `24px "Noto Serif SC", "Andika", serif`; o.fillStyle = '#5a524a';
-        o.fillText([name ? (HS.en() ? `Painted by ${name}` : `${name} 画`) : '', dateText, '护生之约'].filter(Boolean).join(' · '), 80, 880);
+        o.font = `24px "Noto Serif SC", "Songti SC", serif`; o.fillStyle = '#5a524a';
+        o.fillText([name ? `${name} 画` : '', dateText, '护生之约'].filter(Boolean).join(' · '), 80, 880);
         HS.drawSeal(o, sealText, sealX, sealY, 100);
         HS.showPicture(out, `${title}.png`, { title: t('studio.preview'), alt: title, closeLabel: t('studio.edit') });
       }

@@ -1,28 +1,18 @@
-# 丰子恺原画 · Feng Zikai's original paintings
+# 丰子恺原画
 
-Put scans of the original paintings in this folder, using exactly these file names.
-When a file is here, the game shows the original painting. When it is missing, the game
-shows a redrawn sketch and labels it as a sketch.
+把原画的扫描图按下面的文件名放进这个文件夹。有文件时，游戏展示原画；没有时，显示照着原画构图重画的示意图，并标明“示意图”。
 
-把原画的扫描图按下面的文件名放进这个文件夹。有文件时，游戏展示原画；没有时，显示标明“示意图”的重绘草图。
-
-| File | Painting | Source | Used in |
+| 文件名 | 画 | 出处 | 用在 |
 | --- | --- | --- | --- |
-| `qiutu-zhi-ge.jpg` | 《囚徒之歌》 Song of the Prisoners | 《护生画集》第一集 · 1929 | 第五页 · 笼门 (album leaf) |
-| `mu-zhi-yu.jpg` | 《母之羽》 Mother's Feathers | 《护生画集》第一集 · 1929 | 第六页 · 读画 (riddle 2) |
-| `sheng-de-fuchi.jpg` | 《生的扶持》 Helping Each Other Live | 《护生画集》第一集 · 1929 | 第六页 · 读画 (riddle 3) |
-| `abao.jpg` | 《阿宝两只脚，凳子四只脚》 | 子恺漫画 · 1920s | 第六页 · 读画 (riddle 1) |
+| `qiutu-zhi-ge.jpg` | 《囚徒之歌》 | 《护生画集》第一集 · 1929 | 第五页 · 笼门（画页） |
+| `mu-zhi-yu.jpg` | 《母之羽》 | 《护生画集》第一集 · 1929 | 第六页 · 读画（第2幅） |
+| `sheng-de-fuchi.jpg` | 《生的扶持》 | 《护生画集》第一集 · 1929 | 第六页 · 读画（第3幅） |
+| `abao.jpg` | 《阿宝两只脚，凳子四只脚》 | 子恺漫画 · 1920年代 | 第六页 · 读画（第1幅） |
 
-Tips:
+小提示：
 
-- JPEG or PNG, about 1000–1400 px on the long side, is plenty. Crop to the painting itself.
-- For the 读画 riddles, a scan that shows the painting without its facing-page poem works best,
-  because the game reveals the poem after the student answers.
-- The list of paintings, their inscriptions and translations lives in `js/paintings.js`.
-  To add another original, add an entry there and drop its scan here.
+- JPEG 或 PNG 都可以，长边 1000–1400 像素就够了。裁到画面本身。
+- “读画”是先看画、再揭晓题诗，所以扫描图最好只有画，不带对页的题诗。
+- 画的清单、题字和说明写在 `js/paintings.js`。想再加一幅原画，在那里加一项，再把扫描图放进这个文件夹。
 
-Rights: Feng Zikai died in 1975, so under China's copyright term (life + 50 years) his work
-entered the public domain on 1 January 2026. Volume 1 of 护生画集 (1929) and the 1920s
-Zikai Manhua drawings are also in the public domain in the United States (published before 1931).
-Later volumes may still be protected in countries with longer terms, so prefer Volume 1 scans
-if the game will be shared internationally.
+版权：丰子恺于1975年去世，按中国著作权法，他的作品已于2026年1月1日进入公有领域。《护生画集》第一集（1929年）和1920年代的子恺漫画在美国也已进入公有领域（1931年以前出版）。其余几集在保护期更长的国家可能仍受保护，如果要在国外分享，优先使用第一集的扫描图。

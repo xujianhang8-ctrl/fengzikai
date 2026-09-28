@@ -9,14 +9,14 @@
       const list = (items, ordered) => h(ordered ? 'ol' : 'ul', {}, items.map((x) => h('li', {}, x)));
 
       const asks = h('ul', { class: 'asks' },
-        HS.chapters.map((c) => h('li', {}, h('b', {}, `${HS.pageNo(c.no)} · ${t(c.key + '.title')}：`.replace('：', HS.en() ? ': ' : '：')), t(c.askKey || c.key + '.ask'))));
+        HS.chapters.map((c) => h('li', {}, h('b', {}, `${HS.pageNo(c.no)} · ${t(c.key + '.title')}：`), t(c.askKey || c.key + '.ask'))));
 
       // original paintings: which scans are present
       const origList = h('ul', {});
       Object.keys(window.PAINTINGS || {}).forEach((id) => {
         const p = HS.painting(id);
         const status = h('span', { class: 'muted' }, t('teach.checking'));
-        origList.appendChild(h('li', {}, h('span', { class: 'brush', lang: 'zh-CN' }, `《${p.title}》`), ' ', HS.en() ? `${p.titleEn} · ` : '', h('code', {}, p.file), ' — ', status));
+        origList.appendChild(h('li', {}, h('span', { class: 'brush' }, `《${p.title}》`), ' ', h('code', {}, p.file), ' — ', status));
         HS.hasOriginal(id).then((ok) => {
           status.textContent = ok ? t('teach.found') : t('teach.missing');
           status.style.color = ok ? 'var(--ok)' : 'var(--seal-deep)';
@@ -40,8 +40,7 @@
       root.appendChild(h('article', { class: 'doc' },
         h('div', { class: 'toolbar' },
           h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('album') }, '‹ ' + t('ui.album')),
-          h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('title') }, t('ui.cover')),
-          HS.langButton()),
+          h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('title') }, t('ui.cover'))),
         h('h1', {}, t('teach.title')),
         h('section', {}, h('h2', {}, t('teach.who.t')), h('p', {}, t('teach.who'))),
         h('section', {}, h('h2', {}, t('teach.goals.t')), list(t('teach.goals'), true)),

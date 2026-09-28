@@ -6,8 +6,8 @@
   const N = 8, PASS = 6;
 
   async function certificate() {
-    const t = HS.t, en = HS.en();
-    await HS.fontsReady([['80px "Ma Shan Zheng"', '护生小画师证书丰子恺'], ['60px "Caveat Brush"', 'Little Painter'], ['30px "Noto Serif SC"', '同学走进了画册'], ['30px "Andika"', 'Aa']]);
+    const t = HS.t;
+    await HS.fontsReady([['80px "Ma Shan Zheng"', '护生小画师证书丰子恺'], ['30px "Noto Serif SC"', '同学走进了画册']]);
     const W = 1600, H = 1130;
     const cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
@@ -22,31 +22,23 @@
     if (img) g.drawImage(img, 100, 380, 400 * 0.95, 660 * 0.95);
     const brush = '"Ma Shan Zheng","STKaiti","KaiTi",serif';
     g.fillStyle = '#26221e'; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
-    if (en) {
-      g.font = `96px "Caveat Brush", ${brush}`;
-      g.fillText(t('cert.title'), W / 2, 250);
-      g.font = `40px "Andika", sans-serif`; g.fillStyle = '#8c271f';
-      g.fillText(t('cert.word').toUpperCase(), W / 2, 310);
-    } else {
-      g.font = `118px ${brush}`;
-      g.fillText(t('cert.title'), W / 2, 262);
-      g.font = `46px ${brush}`; g.fillStyle = '#8c271f';
-      g.fillText(t('cert.word'), W / 2, 330);
-    }
+    g.font = `118px ${brush}`;
+    g.fillText(t('cert.title'), W / 2, 262);
+    g.font = `46px ${brush}`; g.fillStyle = '#8c271f';
+    g.fillText(t('cert.word'), W / 2, 330);
     const P = HS.progress();
     const name = (HS.state.name || '').trim() || t('cert.anon');
     const body = t('cert.body', { name, pages: P.done, seals: P.seals });
     g.fillStyle = '#26221e';
-    g.font = en ? '36px "Andika", "Trebuchet MS", sans-serif' : '38px "Noto Serif SC", "Songti SC", serif';
+    g.font = '38px "Noto Serif SC", "Songti SC", serif';
     g.textAlign = 'left';
-    wrap(g, body, 520, 440, 900, en ? 56 : 64, !en);
+    wrap(g, body, 520, 440, 900, 64, true);
     g.textAlign = 'center';
     g.font = `52px ${brush}`; g.fillStyle = '#8c271f';
-    g.fillText(HS.zh('cert.quote') + '　——' + HS.zh('cert.quoteBy'), W / 2 + 160, 800);
-    if (en) { g.font = 'italic 30px "Andika", sans-serif'; g.fillStyle = '#5a524a'; g.fillText(`“${t('cert.quoteEn')}” — ${t('cert.quoteBy')}`, W / 2 + 160, 850); }
+    g.fillText(t('cert.quote') + '　——' + t('cert.quoteBy'), W / 2 + 160, 800);
     const d = new Date();
-    g.font = '28px "Noto Serif SC", "Andika", serif'; g.fillStyle = '#5a524a'; g.textAlign = 'right';
-    g.fillText(`${t('cert.issuer')} · ${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()}`, W - 290, H - 150);
+    g.font = '28px "Noto Serif SC", "Songti SC", serif'; g.fillStyle = '#5a524a'; g.textAlign = 'right';
+    g.fillText(`${t('cert.issuer')} · ${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`, W - 290, H - 150);
     HS.drawSeal(g, HS.playerSealText(), W - 260, H - 250, 120);
     return cv;
   }
@@ -66,7 +58,7 @@
 
   HS.screens.quiz = {
     enter(root) {
-      const t = HS.t, en = HS.en();
+      const t = HS.t;
       const { bar, stat } = HS.hud({ no: 8, key: 'quiz' });
       bar.querySelector('.hud-no').textContent = '';
       const main = h('div', { class: 'quiz' });
@@ -91,7 +83,7 @@
       }
 
       function run() {
-        const qs = HS.shuffle(window.QUIZ).slice(0, N).map((q) => q[en ? 'en' : 'zh']);
+        const qs = HS.shuffle(window.QUIZ).slice(0, N);
         let i = 0, score = 0;
         function ask() {
           const q = qs[i];

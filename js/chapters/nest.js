@@ -93,7 +93,7 @@
     skipHowto: true,
     play(ctx) {
       return new Promise((resolve) => {
-        const t = ctx.t, en = HS.en();
+        const t = ctx.t;
         ctx.add('bg', ground() + tree());
         ctx.add('nest', A.place(A.nest(), { x: NEST.x, y: NEST.y + 8, s: 1.3 }));
         const chicks = ctx.add('chicks', nestChicks(true));
@@ -110,7 +110,7 @@
         let cheepClock = 0;
         const stopCheep = ctx.loop((dt) => { cheepClock += dt; if (cheepClock > 3.5) { cheepClock = 0; Sound.chirp(3, 3200); } });
 
-        const who = en ? 'Boy' : '男孩';
+        const who = '男孩';
         ctx.dialogue({
           speaker: who, line: t('nest.boy1'), prompt: t('nest.ask'), replier: who,
           options: HS.shuffle([
@@ -128,7 +128,7 @@
           await ctx.card({
             eyebrow: t('nest.poemBy'),
             title: HS.zh('nest.verse'),
-            body: [note(t('nest.good')), zhPoem(HS.zh('nest.poem')), en ? t('nest.poemEn') : t('nest.poemGloss')],
+            body: [note(t('nest.good')), zhPoem(t('nest.poem')), t('nest.poemGloss')],
             button: t('ui.continue'),
           });
           stopBob(); stopCheep();
@@ -204,7 +204,7 @@
           return new Promise((res) => {
             const c = ctx.chick;
             const hands = HS.sprite(fx, `<path d="M-22 6C-24 18-8 26 0 24 8 26 24 18 22 6C12 12-12 12-22 6Z" fill="${C.paper}" stroke="${C.ink}" stroke-width="1.4"/>`, { opacity: '0' });
-            const meter = ctx.add('meter', `<g transform="translate(40 40)"><text x="0" y="-8" font-size="20" fill="${C.ink2}" font-family="'Ma Shan Zheng','Caveat Brush','KaiTi',serif">${t('nest.fearLabel')}</text><rect x="0" y="0" width="160" height="12" fill="${C.paper}" stroke="${C.ink}" stroke-width="1.2"/><rect class="fear" x="1" y="1" width="0" height="10" fill="${C.seal}"/></g>`);
+            const meter = ctx.add('meter', `<g transform="translate(40 40)"><text x="0" y="-8" font-size="20" fill="${C.ink2}" font-family="'Ma Shan Zheng','KaiTi',serif">${t('nest.fearLabel')}</text><rect x="0" y="0" width="160" height="12" fill="${C.paper}" stroke="${C.ink}" stroke-width="1.2"/><rect class="fear" x="1" y="1" width="0" height="10" fill="${C.seal}"/></g>`);
             const fearBar = meter.querySelector('.fear');
             let held = false, target = null, fear = 0, panic = 0, panics = 0, bumps = 0, bumpCool = 0, lastX = c.x, lastY = c.y, done = false;
             const limit = ctx.easy ? 330 : 240;
