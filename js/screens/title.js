@@ -66,7 +66,7 @@
           actions,
           h('div', { class: 'toolbar' },
             h('button', { class: 'btn btn-small', type: 'button', onclick: () => HS.go('teacher') }, t('title.teacher')),
-            started ? HS.restartButton() : null,
+            HS.restartButton(),
             HS.soundButton()),
           h('p', { class: 'cover-credit' }, t('app.credit')))));
     },
