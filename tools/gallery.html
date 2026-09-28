@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Art gallery · 护生之约</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap">
+<style>
+  body { margin: 16px; background: #f0e9da; font: 14px/1.4 system-ui, sans-serif; color: #2a2521; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  figure { margin: 0; background: #f6f1e5; border: 1px solid #d8cdb5; }
+  figure svg { display: block; width: 100%; height: 190px; }
+  figcaption { padding: 4px 8px; border-top: 1px solid #e3d9c4; }
+</style>
+</head>
+<body>
+<p>A contributor's sheet of every drawing in <code>js/art.js</code>. Open it from the repo to preview changes.</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="defs"></defs></svg>
+<div class="grid" id="grid"></div>
+<script src="../js/art.js"></script>
+<script>
+  document.getElementById('defs').innerHTML = Art.defs();
+  const A = Art, C = A.C;
+  const items = [
+    ['willow', A.willow(110, 310, 0.62)],
+    ['moon + swallows', A.moon(60, 60, 30, { glow: true }) + A.swallow(140, 70, 1.2, -10) + A.swallow(170, 110, 0.9, 8)],
+    ['ant', A.place(A.ant(true), { x: 110, y: 95, s: 4 })],
+    ['leaf', A.place(A.leafShape('#c79a55'), { x: 110, y: 95, s: 4, r: 20 })],
+    ['broom', A.place(A.broom(), { x: 90, y: 170, s: 0.75 })],
+    ['fish', A.place(A.fish('#d9765a'), { x: 110, y: 70, s: 1.8 }) + A.place(A.fish('#8f9c8a'), { x: 100, y: 140, s: 1.5, flip: true })],
+    ['moth', A.place(A.moth(), { x: 110, y: 95, s: 3 })],
+    ['bird (thrush)', A.place(A.bird({ brow: true }), { x: 110, y: 95, s: 2.6 })],
+    ['bird flying', A.place(A.bird({ fly: true, color: '#7d8f9c' }), { x: 110, y: 110, s: 2.6 })],
+    ['nest + chicks', A.place(A.chickHead(true), { x: 90, y: 90, s: 1.6 }) + A.place(A.chickHead(true), { x: 125, y: 86, s: 1.6, flip: true }) + A.place(A.nest(), { x: 110, y: 104, s: 1.8 })],
+    ['fledgling', A.place(A.fledgling(), { x: 110, y: 95, s: 3 })],
+    ['little chicks', A.place(A.littleChick(), { x: 70, y: 110, s: 2.4 }) + A.place(A.littleChick(), { x: 150, y: 110, s: 2.4, flip: true })],
+    ['crab', A.place(A.crab(), { x: 110, y: 110, s: 2.4 })],
+    ['cat', A.place(A.cat(), { x: 110, y: 180, s: 1.4 })],
+    ['cat asleep', A.place(A.cat({ pose: 'sleep' }), { x: 115, y: 130, s: 1.5 })],
+    ['kid (boy)', A.kid({ x: 70, y: 180, s: 1.3 }) + A.kid({ x: 160, y: 180, s: 1.3, hair: 'girl', jacket: C.indigo, legs: 'walk' })],
+    ['kid poses', A.kid({ x: 60, y: 180, s: 1.2, legs: 'crouch', arms: { l: [[-14, -60], [10, -40]], r: [[18, -60], [30, -44]] } }) + A.kid({ x: 160, y: 180, s: 1.2, jacket: C.green, arms: { l: [[-18, -66], [-12, -52]], r: [[22, -88], [26, -112]] } })],
+    ['adults', A.adult({ x: 70, y: 185, s: 0.95 }) + A.adult({ x: 160, y: 185, s: 0.95, robe: '#8e8b82', hair: 'bald' })],
+    ['lamp', A.place(`<circle cx="0" cy="-118" r="70" fill="url(#hs-glow)"/>` + A.lamp(), { x: 110, y: 180, s: 1.1 })],
+    ['gauze on lamp', A.place(A.lamp() + A.place(A.gauze(), { y: -76 }), { x: 110, y: 180, s: 1.1 })],
+    ['cage', A.place(A.cage({ door: true }) + A.place(A.bird({ brow: true }), { y: -80, s: 0.9 }), { x: 110, y: 185, s: 0.8 })],
+    ['feather duster', A.place(A.featherDuster(), { x: 120, y: 100, s: 1.2 })],
+    ['stool + shoes', A.place(A.stool(), { x: 110, y: 150, s: 1.6 }) + A.place(A.shoe(), { x: 50, y: 175, s: 1.4 })],
+    ['seals', A.place(A.seal('护生'), { x: 10, y: 50, s: 0.9 }) + A.place(A.seal('丰小恺'), { x: 115, y: 50, s: 0.9 })],
+    ['desk things', A.desk(20, 200, 120, 60) + A.books(60, 120) + A.brushPot(170, 120) + A.paperStack(120, 120, 5)],
+    ['lotus / grass / flower', A.grass(40, 170, 1.6) + A.flower(120, 170, 2) + A.flower(170, 170, 1.6, C.yellow)],
+    ['butterfly / dragonfly', A.place(A.butterfly(), { x: 70, y: 90, s: 2.2 }) + A.place(A.dragonfly(), { x: 160, y: 80, s: 2 })],
+  ];
+  const grid = document.getElementById('grid');
+  for (const [name, inner] of items) {
+    const f = document.createElement('figure');
+    f.innerHTML = A.svg(inner, 220, 190) + `<figcaption>${name}</figcaption>`;
+    grid.appendChild(f);
+  }
+</script>
+</body>
+</html>
